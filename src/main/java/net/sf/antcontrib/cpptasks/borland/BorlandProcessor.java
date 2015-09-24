@@ -178,8 +178,8 @@ public final class BorlandProcessor {
      * @return arguments for runTask
      */
     public static String[] prepareResponseFile(File outputFile, 
-    		String[] args,
-			String continuation)
+            String[] args,
+            String continuation)
             throws IOException {
         String baseName = outputFile.getName();
         File commandFile = new File(outputFile.getParent(), baseName + ".rsp");

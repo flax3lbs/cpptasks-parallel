@@ -56,12 +56,12 @@ public final class VisualAgeCCompiler extends GccCompatibleCCompiler {
                 null, newEnvironment, env);
     }
     public void addImpliedArgs(final Vector args, 
-    		final boolean debug,
+            final boolean debug,
             final boolean multithreaded, 
-			final boolean exceptions, 
-			final LinkType linkType,
-			final Boolean rtti,
-			final OptimizationEnum optimization) {
+            final boolean exceptions, 
+            final LinkType linkType,
+            final Boolean rtti,
+            final OptimizationEnum optimization) {
         args.addElement("-c");
         if (debug) {
             args.addElement("-g");
@@ -70,11 +70,11 @@ public final class VisualAgeCCompiler extends GccCompatibleCCompiler {
             args.addElement("-fpic");
         }
         if (rtti != null) {
-        	if (rtti.booleanValue()) {
-        		args.addElement("-qrtti=all");
-        	} else {
-        		args.addElement("-qnortti");
-        	}
+            if (rtti.booleanValue()) {
+                args.addElement("-qrtti=all");
+            } else {
+                args.addElement("-qnortti");
+            }
         }
     }
     public void addWarningSwitch(Vector args, int level) {
@@ -112,7 +112,7 @@ public final class VisualAgeCCompiler extends GccCompatibleCCompiler {
      * would lock up.  Using a stock response.
      */
     public String getIdentifier() {
-    	return "VisualAge compiler - unidentified version";
+        return "VisualAge compiler - unidentified version";
     }
     
 }

@@ -43,12 +43,12 @@ public final class WindresResourceCompiler extends CommandLineCompiler {
                 ".inl"}, ".o", false, null, newEnvironment, env);
     }
     protected void addImpliedArgs(final Vector args, 
-    		final boolean debug,
+            final boolean debug,
             final boolean multithreaded, 
-			final boolean exceptions, 
-			final LinkType linkType,
-			final Boolean rtti,
-			final OptimizationEnum optimization) {
+            final boolean exceptions, 
+            final LinkType linkType,
+            final Boolean rtti,
+            final OptimizationEnum optimization) {
         if (debug) {
             args.addElement("-D_DEBUG");
         } else {
@@ -116,6 +116,6 @@ public final class WindresResourceCompiler extends CommandLineCompiler {
         buffer.append(define);
     }
     public String getIdentifier() {
-    	return "GNU windres";
+        return "GNU windres";
     }
 }

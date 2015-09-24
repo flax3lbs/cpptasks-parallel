@@ -42,8 +42,8 @@ public class TestAbstractCompiler extends TestAbstractProcessor {
         }
         public CompilerConfiguration createConfiguration(CCTask task,
                 LinkType linkType, ProcessorDef[] def1, CompilerDef def2,
-				net.sf.antcontrib.cpptasks.TargetDef targetPlatform,
-				VersionInfo versionInfo) {
+                net.sf.antcontrib.cpptasks.TargetDef targetPlatform,
+                VersionInfo versionInfo) {
             return null;
         }
         public Parser createParser(File file) {

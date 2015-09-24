@@ -209,18 +209,18 @@ public final class CommandLineCompilerConfiguration
         return identifier;
     }
     public String[] getPreArguments() {
-    	return (String[]) args.clone();
+        return (String[]) args.clone();
     }
     public String[] getEndArguments() {
-    	return (String[]) endArgs.clone();
+        return (String[]) endArgs.clone();
     }
     public File[] getIncludePath() {
-    	return (File[]) includePath.clone();
+        return (File[]) includePath.clone();
     }
     public Compiler getCompiler() {
-    	return compiler;
+        return compiler;
     }
     public String getCommand() {
-    	return compiler.getCommand();
+        return compiler.getCommand();
     }
 }

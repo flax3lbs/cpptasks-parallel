@@ -75,7 +75,7 @@ public final class CBuilderXProjectWriter
   public void writeProject(final File fileName,
                            final CCTask task,
                            final ProjectDef projectDef,
-						   final List sources,
+                           final List sources,
                            final Map targets,
                            final TargetInfo linkTarget) throws
       IOException,

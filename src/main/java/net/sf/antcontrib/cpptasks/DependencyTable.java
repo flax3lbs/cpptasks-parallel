@@ -182,7 +182,7 @@ public final class DependencyTable {
 //            int withCompositeTimes = 0;
 //            long parentCompositeLastModified = parent.getSourceLastModified();
 // ENDFREEHEP
-        	for (int i = 0; i < children.length; i++) {
+            for (int i = 0; i < children.length; i++) {
                 if (children[i] != null) {
                     //
                     //  expedient way to determine if a child forces us to
@@ -202,11 +202,11 @@ public final class DependencyTable {
                 }
             }
 // BEGINFREEHEP
-//        	if (withCompositeTimes == children.length) {
+//            if (withCompositeTimes == children.length) {
 //                parent.setCompositeLastModified(parentCompositeLastModified);
 //            }
 // ENDFREEHEP
-        	//
+            //
             //  may have been changed by an earlier call to visit()
             //
             return noNeedToRebuild;
@@ -220,7 +220,7 @@ public final class DependencyTable {
             if (noNeedToRebuild) {
                     if (CUtil.isSignificantlyAfter(dependInfo.getSourceLastModified(), outputLastModified)) {
 //FREEHEP
-//                    		|| CUtil.isSignificantlyAfter(dependInfo.getCompositeLastModified(), outputLastModified)) {
+//                            || CUtil.isSignificantlyAfter(dependInfo.getCompositeLastModified(), outputLastModified)) {
                     noNeedToRebuild = false;
                 }
             }
@@ -478,7 +478,7 @@ public final class DependencyTable {
       if (dependInfo.hasTag(visitor)) {
          return;
       }
-      dependInfo.setTag(visitor);    	
+      dependInfo.setTag(visitor);        
 // ENDFREEHEP
         //
         //   visit this node
@@ -487,7 +487,7 @@ public final class DependencyTable {
         //
         if (visitor.visit(dependInfo)) {
 // BEGINFREEHEP
-//        	//
+//            //
 //            //   find first null entry on stack
 //            //
 //            int stackPosition = -1;
@@ -510,7 +510,7 @@ public final class DependencyTable {
 //                return;
 //            }
 // ENDFREEHEP
-        	//
+            //
             //   locate dependency infos
             //
             String[] includes = dependInfo.getIncludes();
@@ -555,21 +555,21 @@ public final class DependencyTable {
                     //
                     for (int i = 0; i < includeInfos.length; i++) {
                         DependencyInfo includeInfo = includeInfos[i];
-						// Darren Sargent 23Oct2008
-						// only recurse for direct includes of current source
-						// file
-						if (includeInfo.getSource().contains(
-								File.separatorChar + "src" + File.separatorChar
-										+ "main")
-								|| includeInfo.getSource().contains(
-										File.separatorChar + "src"
-												+ File.separatorChar + "test")) {
-							task.log("Walking dependencies for "
-									+ includeInfo.getSource(),
-									Project.MSG_VERBOSE);
-							walkDependencies(task, includeInfo, compiler,
-									stack, visitor);
-						}
+                        // Darren Sargent 23Oct2008
+                        // only recurse for direct includes of current source
+                        // file
+                        if (includeInfo.getSource().contains(
+                                File.separatorChar + "src" + File.separatorChar
+                                        + "main")
+                                || includeInfo.getSource().contains(
+                                        File.separatorChar + "src"
+                                                + File.separatorChar + "test")) {
+                            task.log("Walking dependencies for "
+                                    + includeInfo.getSource(),
+                                    Project.MSG_VERBOSE);
+                            walkDependencies(task, includeInfo, compiler,
+                                    stack, visitor);
+                        }
                     }
                 }
             }

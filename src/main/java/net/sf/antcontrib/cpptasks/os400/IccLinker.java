@@ -198,12 +198,12 @@ public final class IccLinker extends CommandLineLinker {
         return rc;
     }
     public String[] getOutputFileNames(String baseName, VersionInfo versionInfo) {
-    	String[] baseNames = super.getOutputFileNames(baseName, versionInfo);
-    	if (outputPrefix.length() > 0) {
-    		for(int i = 0; i < baseNames.length; i++) {
-    			baseNames[i] = outputPrefix + baseNames[i];
-    		}
-    	}
+        String[] baseNames = super.getOutputFileNames(baseName, versionInfo);
+        if (outputPrefix.length() > 0) {
+            for(int i = 0; i < baseNames.length; i++) {
+                baseNames[i] = outputPrefix + baseNames[i];
+            }
+        }
         return baseNames;
     }
 }

@@ -266,11 +266,11 @@ public class CompilerEnum extends EnumeratedAttribute {
             new ProcessorEnumValue("g77-cross",
                     net.sf.antcontrib.cpptasks.gcc.cross.GccCCompiler
                             .getG77Instance()),
-			new ProcessorEnumValue("uic", UserInterfaceCompiler.getInstance()),
-			new ProcessorEnumValue("moc", MetaObjectCompiler.getInstance()),
-			new ProcessorEnumValue("xpidl", XpidlCompiler.getInstance()),
-			new ProcessorEnumValue("wcl", OpenWatcomCCompiler.getInstance()),
-			new ProcessorEnumValue("wfl", OpenWatcomFortranCompiler.getInstance()),
+            new ProcessorEnumValue("uic", UserInterfaceCompiler.getInstance()),
+            new ProcessorEnumValue("moc", MetaObjectCompiler.getInstance()),
+            new ProcessorEnumValue("xpidl", XpidlCompiler.getInstance()),
+            new ProcessorEnumValue("wcl", OpenWatcomCCompiler.getInstance()),
+            new ProcessorEnumValue("wfl", OpenWatcomFortranCompiler.getInstance()),
             new ProcessorEnumValue("windres", WindresResourceCompiler.getInstance())
                             };
     public Compiler getCompiler() {

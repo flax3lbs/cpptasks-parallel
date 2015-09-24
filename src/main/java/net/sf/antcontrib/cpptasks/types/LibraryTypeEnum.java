@@ -42,7 +42,7 @@ public class LibraryTypeEnum extends EnumeratedAttribute {
         return new String[]{"shared", // prefer shared libraries
                 "static", // prefer static libraries
                 "framework" // framework libraries (Mac OS/X)
-				            //  equiv to shared on other platforms
+                            //  equiv to shared on other platforms
         };
     }
 }

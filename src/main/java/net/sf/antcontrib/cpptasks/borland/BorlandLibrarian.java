@@ -94,7 +94,7 @@ public class BorlandLibrarian extends CommandLineLinker {
      * just return a stock response.
      */
     public String getIdentifier() {
-    	return "TLIB 4.5 Copyright (c) 1987, 1999 Inprise Corporation";
+        return "TLIB 4.5 Copyright (c) 1987, 1999 Inprise Corporation";
     }
     
     /**
@@ -109,12 +109,12 @@ public class BorlandLibrarian extends CommandLineLinker {
      * @return arguments for runTask
      */
     protected String[] prepareArguments(
-    		CCTask task,
-    		String outputDir, 
-			String outputName,
+            CCTask task,
+            String outputDir, 
+            String outputName,
             String[] sourceFiles, 
-			CommandLineLinkerConfiguration config) {
-    	String[] preargs = config.getPreArguments();
+            CommandLineLinkerConfiguration config) {
+        String[] preargs = config.getPreArguments();
         String[] endargs = config.getEndArguments();
         StringBuffer buf = new StringBuffer();
         Vector execArgs = new Vector(preargs.length + endargs.length + 10
@@ -159,12 +159,12 @@ public class BorlandLibrarian extends CommandLineLinker {
         String[] execArguments = new String[execArgs.size()];
         execArgs.copyInto(execArguments);
 
-    	int minPageSize = objBytes >> 16;
-    	int pageSize = 0;
-    	for(int i = 4; i <= 15; i++) {
-    		pageSize = 1 << i;
-    		if (pageSize > minPageSize) break;
-    	}
+        int minPageSize = objBytes >> 16;
+        int pageSize = 0;
+        for(int i = 4; i <= 15; i++) {
+            pageSize = 1 << i;
+            if (pageSize > minPageSize) break;
+        }
         execArguments[pageSizeIndex] = "/P" + Integer.toString(pageSize);
         
         return execArguments;
@@ -181,7 +181,7 @@ public class BorlandLibrarian extends CommandLineLinker {
      */
     protected String[] prepareResponseFile(File outputFile, String[] args)
             throws IOException {
-    	String[] cmdargs = BorlandProcessor.prepareResponseFile(outputFile, args, " & \n");
+        String[] cmdargs = BorlandProcessor.prepareResponseFile(outputFile, args, " & \n");
         cmdargs[cmdargs.length - 1] = getCommandFileSwitch(cmdargs[cmdargs.length -1]);
         return cmdargs;
     }
@@ -196,12 +196,12 @@ public class BorlandLibrarian extends CommandLineLinker {
                      CommandLineLinkerConfiguration config)
                      throws BuildException
     {
-    	//
-    	//  delete any existing library
-    	outputFile.delete();
-    	//
-    	//  build a new library
-    	super.link(task, outputFile, sourceFiles, config);
+        //
+        //  delete any existing library
+        outputFile.delete();
+        //
+        //  build a new library
+        super.link(task, outputFile, sourceFiles, config);
     }
     
     /**

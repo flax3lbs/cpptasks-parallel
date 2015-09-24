@@ -71,10 +71,10 @@ public interface Linker extends Processor {
      * @param objDir directory for generated files
      * @param matcher bidded fileset
      */
-	void addVersionFiles(final VersionInfo versionInfo, 
-			final LinkType linkType,
-			final File outputFile,
-			final boolean isDebug,
-			final File objDir, 
-			final TargetMatcher matcher) throws IOException;
+    void addVersionFiles(final VersionInfo versionInfo, 
+            final LinkType linkType,
+            final File outputFile,
+            final boolean isDebug,
+            final File objDir, 
+            final TargetMatcher matcher) throws IOException;
 }

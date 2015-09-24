@@ -338,7 +338,7 @@
 
   <target name="detab" depends="prepare" description="detabs java files">
       <replace token="&#9;" value="    " dir="src" includes="**/*.java"/>
-      <replace token="&#9;" value="    " dir="test" includes="**/*.java"/>
+      <replace token="&#9;" value="    " dir="src/test" includes="**/*.java"/>
 
   </target>
 

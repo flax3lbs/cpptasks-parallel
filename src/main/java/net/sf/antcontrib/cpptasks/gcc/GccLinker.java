@@ -34,7 +34,7 @@ public class GccLinker extends AbstractLdLinker {
             ".lib", ".dll", ".so", ".sl"};
     private static String[] linkerOptions = new String[]{"-bundle",
 // FREEHEP
-    	    "-dynamic", 
+            "-dynamic", 
             "-dynamiclib", "-nostartfiles", "-nostdlib", "-prebind", "-s",
             "-static", "-shared", "-symbolic", "-Xlinker",
             "--export-all-symbols", "-static-libgcc",};

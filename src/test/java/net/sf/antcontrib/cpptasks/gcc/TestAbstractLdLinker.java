@@ -217,9 +217,9 @@ public class TestAbstractLdLinker extends TestCase {
         AbstractLdLinker linker = getLinker();
         CCTask task = new CCTask();
         LibrarySet[] sets = new LibrarySet[]{
-        		new LibrarySet(), 
-				new LibrarySet(),
-				new LibrarySet()};
+                new LibrarySet(), 
+                new LibrarySet(),
+                new LibrarySet()};
         /* throws an Exception in setLibs otherwise */
         sets[0].setProject(new org.apache.tools.ant.Project());
         sets[0].setLibs(new CUtil.StringArrayBuilder("bart"));

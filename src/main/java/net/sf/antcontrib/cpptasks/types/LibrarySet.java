@@ -102,7 +102,7 @@ public class LibrarySet extends DataType {
             LibrarySet master = ((LibrarySet) getCheckedRef(LibrarySet.class, "LibrarySet"));
             return master.getType();
         }
-    	return libraryType;
+        return libraryType;
     }
     /**
      * Returns true if the define's if and unless conditions (if any) are
@@ -250,7 +250,7 @@ public class LibrarySet extends DataType {
         if (isReference()) {
             throw tooManyAttributes();
         }
-    	this.libraryType = type;
+        this.libraryType = type;
     }
     
     public void visitLibraries(final Project project,
@@ -286,35 +286,35 @@ public class LibrarySet extends DataType {
                         entry.setName(patterns[j]);
                     }
                    int matches = 0;
-		           //
-		           //  if there was no specified directory then
-		           //     run through the libpath backwards
-		           //
-		           if (localSet.getDir(project) == null) {
-		               //
-		               //  scan libpath in reverse order
-		               //     to give earlier entries priority
-		               //
-		               for (int j = libpath.length - 1; j >= 0; j--) {
-		                   FileSet clone = (FileSet) localSet.clone();
-		                   clone.setDir(libpath[j]);
-		                   DirectoryScanner scanner = clone.getDirectoryScanner(project);
-		                   File basedir = scanner.getBasedir();
-		                   String[] files = scanner.getIncludedFiles();
+                   //
+                   //  if there was no specified directory then
+                   //     run through the libpath backwards
+                   //
+                   if (localSet.getDir(project) == null) {
+                       //
+                       //  scan libpath in reverse order
+                       //     to give earlier entries priority
+                       //
+                       for (int j = libpath.length - 1; j >= 0; j--) {
+                           FileSet clone = (FileSet) localSet.clone();
+                           clone.setDir(libpath[j]);
+                           DirectoryScanner scanner = clone.getDirectoryScanner(project);
+                           File basedir = scanner.getBasedir();
+                           String[] files = scanner.getIncludedFiles();
                            matches += files.length;
                            for (int k = 0; k < files.length; k++) {
-		                       visitor.visit(basedir, files[k]);
-		                   }
-		               }
-		           } else {
-		               DirectoryScanner scanner = localSet.getDirectoryScanner(project);
-		               File basedir = scanner.getBasedir();
-		               String[] files = scanner.getIncludedFiles();
+                               visitor.visit(basedir, files[k]);
+                           }
+                       }
+                   } else {
+                       DirectoryScanner scanner = localSet.getDirectoryScanner(project);
+                       File basedir = scanner.getBasedir();
+                       String[] files = scanner.getIncludedFiles();
                        matches += files.length;
-		               for (int k = 0; k < files.length; k++) {
-		                   visitor.visit(basedir, files[k]);
-		               }
-		           }
+                       for (int k = 0; k < files.length; k++) {
+                           visitor.visit(basedir, files[k]);
+                       }
+                   }
                    //
                    //  TODO: following section works well for Windows
                    //      style linkers but unnecessary fails

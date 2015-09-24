@@ -58,8 +58,8 @@ public final class aCCCompiler extends GccCompatibleCCompiler {
     }
     public void addImpliedArgs(Vector args, boolean debug,
             boolean multithreaded, boolean exceptions, LinkType linkType,
-			final Boolean rtti,
-			final OptimizationEnum optimization) {
+            final Boolean rtti,
+            final OptimizationEnum optimization) {
         args.addElement("-c");
         if (debug) {
             args.addElement("-g");

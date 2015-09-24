@@ -100,7 +100,7 @@ public abstract class GccCompatibleCCompiler extends CommandLineCCompiler {
         }
 // BEGINFREEHEP, tests have been modified
         if (!exceptions) {
-        	args.addElement("-fno-exceptions");
+            args.addElement("-fno-exceptions");
         }
 // ENDFREEHEP
 // BEGINFREEHEP moved to GccCCompiler
@@ -144,12 +144,12 @@ public abstract class GccCompatibleCCompiler extends CommandLineCCompiler {
     }
     // Darren Sargent 22Oct2008 - added overloads to properly handle system paths
     public String getIncludeDirSwitch(String includeDir) {
-    	return getIncludeDirSwitch(includeDir, false);
+        return getIncludeDirSwitch(includeDir, false);
     }
     public String getIncludeDirSwitch(String includeDir, boolean isSystem) {
-    	if ( isSystem ) {
-    		return "-isystem" + includeDir;
-    	} else {
+        if ( isSystem ) {
+            return "-isystem" + includeDir;
+        } else {
         return "-I" + includeDir;
     }
     }

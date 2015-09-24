@@ -33,8 +33,8 @@ public class TestAbstractProcessor extends TestCase {
         public ProcessorConfiguration createConfiguration(CCTask task,
                 LinkType linkType, ProcessorDef[] defaultProvider,
                 ProcessorDef specificProvider,
-				net.sf.antcontrib.cpptasks.TargetDef targetPlatform,
-				VersionInfo versionInfo) {
+                net.sf.antcontrib.cpptasks.TargetDef targetPlatform,
+                VersionInfo versionInfo) {
             return null;
         }
         public String getIdentifier() {

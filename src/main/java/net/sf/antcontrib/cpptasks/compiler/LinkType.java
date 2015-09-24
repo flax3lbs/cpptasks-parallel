@@ -30,10 +30,10 @@ public class LinkType {
     
 // BEGINFREEHEP
     private boolean linkCPP = true;
-	private boolean linkFortran = false;
-	private boolean linkFortranMain = false;
+    private boolean linkFortran = false;
+    private boolean linkFortranMain = false;
 // ENDFREEHEP
-	
+    
     /**
      * Constructor
      * 
@@ -54,7 +54,7 @@ public class LinkType {
     
     public boolean isJNIModule() {
         String value = outputType.getValue();
-        return value.equals("jni");    	
+        return value.equals("jni");        
     }
     /**
      * Gets whether the link should produce a plugin module.
@@ -128,7 +128,7 @@ public class LinkType {
      * @return output type
      */
     public String getOutputType() {
-    	return outputType.getValue();
+        return outputType.getValue();
     }
     
     /**
@@ -158,33 +158,33 @@ public class LinkType {
      * @return subsystem name
      */
     public String getSubsystem() {
-    	return subsystem.getValue();
+        return subsystem.getValue();
     }
     
 // BEGINFREEHEP
     public void setLinkCPP(boolean linkCPP) {
-    	this.linkCPP = linkCPP;
+        this.linkCPP = linkCPP;
     }
     
     public boolean linkCPP() {
-    	return linkCPP;
+        return linkCPP;
     }
 
     public void setLinkFortran(boolean linkFortran) {
-    	this.linkFortran = linkFortran;
+        this.linkFortran = linkFortran;
     }
     
     public boolean linkFortran() {
-		return linkFortran;
-	}
+        return linkFortran;
+    }
 
     public void setLinkFortranMain(boolean linkFortranMain) {
-		this.linkFortranMain = linkFortranMain;
-	}
+        this.linkFortranMain = linkFortranMain;
+    }
     
     public boolean linkFortranMain() {
-    	return linkFortranMain;
+        return linkFortranMain;
     }
-	// ENDFREEHEP
+    // ENDFREEHEP
     
 }

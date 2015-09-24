@@ -45,12 +45,12 @@ public final class DevStudioResourceCompiler extends CommandLineCompiler {
                 ".inl"}, ".res", false, null, newEnvironment, env);
     }
     protected void addImpliedArgs(final Vector args, 
-    		final boolean debug,
+            final boolean debug,
             final boolean multithreaded, 
-			final boolean exceptions, 
-			final LinkType linkType,
-			final Boolean rtti,
-			final OptimizationEnum optimization) {
+            final boolean exceptions, 
+            final LinkType linkType,
+            final Boolean rtti,
+            final OptimizationEnum optimization) {
         if (debug) {
             args.addElement("/D_DEBUG");
         } else {
@@ -115,6 +115,6 @@ public final class DevStudioResourceCompiler extends CommandLineCompiler {
         DevStudioProcessor.getUndefineSwitch(buffer, define);
     }
     public String getIdentifier() {
-    	return "Microsoft (R) Windows (R) Resource Compiler";
+        return "Microsoft (R) Windows (R) Resource Compiler";
     }
 }

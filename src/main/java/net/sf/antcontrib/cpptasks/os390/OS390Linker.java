@@ -150,12 +150,12 @@ public final class OS390Linker extends CommandLineLinker {
         return Integer.MAX_VALUE;
     }
     public String[] getOutputFileNames(String baseName, VersionInfo versionInfo) {
-    	String[] baseNames = super.getOutputFileNames(baseName, versionInfo);
-    	if (outputPrefix.length() > 0) {
-    		for(int i = 0; i < baseNames.length; i++) {
-    			baseNames[i] = outputPrefix + baseNames[i];
-    		}
-    	}
+        String[] baseNames = super.getOutputFileNames(baseName, versionInfo);
+        if (outputPrefix.length() > 0) {
+            for(int i = 0; i < baseNames.length; i++) {
+                baseNames[i] = outputPrefix + baseNames[i];
+            }
+        }
         return baseNames;
     }
     protected String[] getOutputFileSwitch(CCTask task, String outputFile) {

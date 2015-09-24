@@ -136,10 +136,10 @@ public class ClxxLinker extends CommandLineLinker {
      * @see net.sf.antcontrib.cpptasks.compiler.Linker#getLibraryPatterns(java.lang.String[])
      */
     public String[] getLibraryPatterns(String[] libnames, LibraryTypeEnum libType) {
-    	//
-    	//  TODO: Looks bogus, should be .a or .so's not .o's
-    	//
-    	String[] libpats = new String[libnames.length];
+        //
+        //  TODO: Looks bogus, should be .a or .so's not .o's
+        //
+        String[] libpats = new String[libnames.length];
         for (int i = 0; i < libnames.length; i++) {
             libpats[i] = libnames[i] + ".o";
         }

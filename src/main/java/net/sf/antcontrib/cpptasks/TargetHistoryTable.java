@@ -92,7 +92,7 @@ public final class TargetHistoryTable {
                         //      a second
                         long existingLastModified = existingFile.lastModified();
                         if (!CUtil.isSignificantlyBefore(existingLastModified, outputLastModified)
-                        		&& !CUtil.isSignificantlyAfter(existingLastModified, outputLastModified)) {
+                                && !CUtil.isSignificantlyAfter(existingLastModified, outputLastModified)) {
                             SourceHistory[] sourcesArray = new SourceHistory[sources
                                     .size()];
                             sources.copyInto(sourcesArray);
@@ -381,7 +381,7 @@ public final class TargetHistoryTable {
             onesource[0] = sources[i];
             outputNames = config.getOutputFileNames(sources[i], versionInfo);
             for (int j = 0; j < outputNames.length; j++) {
-            	update(configId, outputNames[j], onesource);
+                update(configId, outputNames[j], onesource);
             }
         }
     }
@@ -394,7 +394,7 @@ public final class TargetHistoryTable {
         //        do not write add a history entry
         //
         if (outputFile.exists() &&
-        		!CUtil.isSignificantlyBefore(outputFile.lastModified(), historyFile.lastModified())) {
+                !CUtil.isSignificantlyBefore(outputFile.lastModified(), historyFile.lastModified())) {
             dirty = true;
             history.remove(outputName);
             SourceHistory[] sourceHistories = new SourceHistory[sources.length];

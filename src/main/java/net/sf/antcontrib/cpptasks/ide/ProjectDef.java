@@ -91,8 +91,8 @@ public final class ProjectDef
   private List dependencies = new ArrayList();
 
      /**
-	  *   List of comments.
-	  */
+      *   List of comments.
+      */
   private List comments = new ArrayList();
 
   /**
@@ -350,7 +350,7 @@ public final class ProjectDef
 
 
     /**
-	 *  Add comment for the generated project file.
+     *  Add comment for the generated project file.
      * @param comment comment, may not be null.
      */
   public void addComment(final CommentDef comment) {

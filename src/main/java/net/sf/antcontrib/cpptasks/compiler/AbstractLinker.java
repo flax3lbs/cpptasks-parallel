@@ -70,12 +70,12 @@ public abstract class AbstractLinker extends AbstractProcessor
     abstract protected LinkerConfiguration createConfiguration(CCTask task,
             LinkType linkType, ProcessorDef[] baseConfigs,
             LinkerDef specificConfig, TargetDef targetPlatform,
-			VersionInfo versionInfo);
+            VersionInfo versionInfo);
     public ProcessorConfiguration createConfiguration(CCTask task,
             LinkType linkType, ProcessorDef[] baseConfigs,
             ProcessorDef specificConfig,
-			TargetDef targetPlatform,
-			VersionInfo versionInfo) {
+            TargetDef targetPlatform,
+            VersionInfo versionInfo) {
         if (specificConfig == null) {
             throw new NullPointerException("specificConfig");
         }
@@ -99,24 +99,24 @@ public abstract class AbstractLinker extends AbstractProcessor
      * @param objDir directory for generated files
      * @param matcher bidded fileset
      */
-	public void addVersionFiles(final VersionInfo versionInfo, 
-			final LinkType linkType,
-			final File outputFile,
-			final boolean isDebug,
-			final File objDir, 
-			final TargetMatcher matcher) throws IOException {
-		if (versionInfo == null) {
-			throw new NullPointerException("versionInfo");
-		}
-		if (linkType == null) {
-			throw new NullPointerException("linkType");
-		}
-		if (outputFile == null) {
-			throw new NullPointerException("outputFile");
-		}
-		if (objDir == null) {
-			throw new NullPointerException("objDir");
-		}
-	}
+    public void addVersionFiles(final VersionInfo versionInfo, 
+            final LinkType linkType,
+            final File outputFile,
+            final boolean isDebug,
+            final File objDir, 
+            final TargetMatcher matcher) throws IOException {
+        if (versionInfo == null) {
+            throw new NullPointerException("versionInfo");
+        }
+        if (linkType == null) {
+            throw new NullPointerException("linkType");
+        }
+        if (outputFile == null) {
+            throw new NullPointerException("outputFile");
+        }
+        if (objDir == null) {
+            throw new NullPointerException("objDir");
+        }
+    }
     
 }

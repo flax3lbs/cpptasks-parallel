@@ -55,7 +55,7 @@ public abstract class AbstractLdLinker extends CommandLineLinker {
             args.addElement("-g");
         }
         if (isDarwin()) {
-        	if (linkType.isPluginModule()) {
+            if (linkType.isPluginModule()) {
                 args.addElement("-bundle");
 // BEGINFREEHEP
             } else if (linkType.isJNIModule()) {
@@ -128,10 +128,10 @@ public abstract class AbstractLdLinker extends CommandLineLinker {
             if (set.getType() != previousLibraryType) {
                     if (set.getType() != null && "static".equals(set.getType().getValue())) {
 // BEGINFREEHEP not on MacOS X
-                    	if (!isDarwin()) {
+                        if (!isDarwin()) {
                             endargs.addElement(getStaticLibFlag());
                             previousLibraryType = set.getType();
-                    	}
+                        }
 //ENDFREEHEP                          
                     } else {
 // FREEHEP not on MacOS X, recheck this!

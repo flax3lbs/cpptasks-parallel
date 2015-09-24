@@ -78,15 +78,15 @@ public class C89Processor {
         StringBuffer buf = new StringBuffer();
         int patternCount = libnames.length*2;
         if (libType != null) {
-        	patternCount = libnames.length;
+            patternCount = libnames.length;
         }
         String[] patterns = new String[patternCount];
         int offset = 0;
         if (libType == null || "static".equals(libType.getValue())) {
-        	offset = addLibraryPatterns(libnames, buf, "lib", ".a", patterns, 0);
+            offset = addLibraryPatterns(libnames, buf, "lib", ".a", patterns, 0);
         }
         if (libType == null || !"static".equals(libType.getValue())) {
-        	offset = addLibraryPatterns(libnames, buf, "lib", ".so", patterns,
+            offset = addLibraryPatterns(libnames, buf, "lib", ".so", patterns,
                 offset);
         }
         return patterns;

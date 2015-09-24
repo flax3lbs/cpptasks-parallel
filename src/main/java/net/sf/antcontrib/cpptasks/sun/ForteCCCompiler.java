@@ -54,28 +54,28 @@ public final class ForteCCCompiler extends GccCompatibleCCompiler {
                 false, null);
     }
     public void addImpliedArgs(final Vector args, 
-    		final boolean debug,
+            final boolean debug,
             final boolean multithreaded, 
-			final boolean exceptions, 
-			final LinkType linkType,
-			final Boolean rtti,
-			final OptimizationEnum optimization) {
+            final boolean exceptions, 
+            final LinkType linkType,
+            final Boolean rtti,
+            final OptimizationEnum optimization) {
         args.addElement("-c");
         if (debug) {
             args.addElement("-g");
         }
-    	if (optimization != null) {
-    		if (optimization.isSpeed()) {
-    			args.addElement("-xO2");
-    		}
-    	}
-    	if (rtti != null) {
-    		if (rtti.booleanValue()) {
-    			args.addElement("-features=rtti");
-    		} else {
-    			args.addElement("-features=no%rtti");
-    		}
-    	}
+        if (optimization != null) {
+            if (optimization.isSpeed()) {
+                args.addElement("-xO2");
+            }
+        }
+        if (rtti != null) {
+            if (rtti.booleanValue()) {
+                args.addElement("-features=rtti");
+            } else {
+                args.addElement("-features=no%rtti");
+            }
+        }
         if (multithreaded) {
             args.addElement("-mt");
         }

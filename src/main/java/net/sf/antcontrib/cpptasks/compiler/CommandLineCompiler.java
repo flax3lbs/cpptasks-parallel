@@ -66,7 +66,7 @@ public abstract class CommandLineCompiler extends AbstractCompiler {
     }
     abstract protected void addImpliedArgs(Vector args, boolean debug,
             boolean multithreaded, boolean exceptions, LinkType linkType,
-			Boolean rtti, OptimizationEnum optimization);
+            Boolean rtti, OptimizationEnum optimization);
     /**
      * Adds command-line arguments for include directories.
      * 
@@ -84,15 +84,15 @@ public abstract class CommandLineCompiler extends AbstractCompiler {
      *            configuration identifier
      */
     protected void addIncludes(String baseDirPath, File[] includeDirs,
-			Vector args, Vector relativeArgs, StringBuffer includePathId,
-			boolean isSystem) {
+            Vector args, Vector relativeArgs, StringBuffer includePathId,
+            boolean isSystem) {
         for (int i = 0; i < includeDirs.length; i++) {
             args.addElement(getIncludeDirSwitch(includeDirs[i]
-					.getAbsolutePath(), isSystem));
+                    .getAbsolutePath(), isSystem));
             if (relativeArgs != null) {
-				String relative = CUtil.getRelativePath(baseDirPath,
+                String relative = CUtil.getRelativePath(baseDirPath,
                         includeDirs[i]);
-				relativeArgs.addElement(getIncludeDirSwitch(relative, isSystem));
+                relativeArgs.addElement(getIncludeDirSwitch(relative, isSystem));
                 if (includePathId != null) {
                     if (includePathId.length() == 0) {
                         includePathId.append("/I");
@@ -237,10 +237,10 @@ public abstract class CommandLineCompiler extends AbstractCompiler {
     }
     protected CompilerConfiguration createConfiguration(final CCTask task,
             final LinkType linkType, 
-			final ProcessorDef[] baseDefs, 
-			final CompilerDef specificDef,
-			final TargetDef targetPlatform,
-			final VersionInfo versionInfo) {
+            final ProcessorDef[] baseDefs, 
+            final CompilerDef specificDef,
+            final TargetDef targetPlatform,
+            final VersionInfo versionInfo) {
         Vector args = new Vector();
         CompilerDef[] defaultProviders = new CompilerDef[baseDefs.length + 1];
         for (int i = 0; i < baseDefs.length; i++) {
@@ -352,8 +352,8 @@ public abstract class CommandLineCompiler extends AbstractCompiler {
             sysIncPath[i] = new File((String) sysIncludePath.elementAt(i));
         }
         addIncludes(baseDirPath, incPath, args, relativeArgs,
-				includePathIdentifier, false);
-		addIncludes(baseDirPath, sysIncPath, args, null, null, true);
+                includePathIdentifier, false);
+        addIncludes(baseDirPath, sysIncPath, args, null, null, true);
         StringBuffer buf = new StringBuffer(getIdentifier());
         for (int i = 0; i < relativeArgs.size(); i++) {
             buf.append(' ');
@@ -394,22 +394,22 @@ public abstract class CommandLineCompiler extends AbstractCompiler {
     }
     abstract protected String getIncludeDirSwitch(String source);
     
-	/**
-	 * Added by Darren Sargent 22Oct2008 Returns the include dir switch value.
-	 * Default implementation doesn't treat system includes specially, for
-	 * compilers which don't care.
-	 * 
-	 * @param source
-	 *            the given source value.
-	 * @param isSystem
-	 *            "true" if this is a system include path
-	 * 
-	 * @return the include dir switch value.
-	 */
-	protected String getIncludeDirSwitch(String source, boolean isSystem) {
-		return getIncludeDirSwitch(source);
-	}
-	protected String getInputFileArgument(File outputDir, String filename,
+    /**
+     * Added by Darren Sargent 22Oct2008 Returns the include dir switch value.
+     * Default implementation doesn't treat system includes specially, for
+     * compilers which don't care.
+     * 
+     * @param source
+     *            the given source value.
+     * @param isSystem
+     *            "true" if this is a system include path
+     * 
+     * @return the include dir switch value.
+     */
+    protected String getIncludeDirSwitch(String source, boolean isSystem) {
+        return getIncludeDirSwitch(source);
+    }
+    protected String getInputFileArgument(File outputDir, String filename,
             int index) {
         //
         //   if there is an embedded space,

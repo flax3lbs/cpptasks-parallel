@@ -126,9 +126,9 @@ public class ADSLinker extends CommandLineLinker {
      * @see net.sf.antcontrib.cpptasks.compiler.Linker#getLibraryPatterns(java.lang.String[])
      */
     public String[] getLibraryPatterns(String[] libnames, LibraryTypeEnum libType) {
-    	//
-    	//  TODO: looks like bad extension
-    	//
+        //
+        //  TODO: looks like bad extension
+        //
         return new String[]{".o"};
     }
     /*

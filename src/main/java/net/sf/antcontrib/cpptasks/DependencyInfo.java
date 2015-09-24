@@ -27,7 +27,7 @@ public final class DependencyInfo {
      * to long.MIN_VALUE on construction.
      */
 // FREEHEP
-//	private long compositeLastModified;
+//    private long compositeLastModified;
     private/* final */String includePathIdentifier;
     private/* final */String[] includes;
     private/* final */String source;

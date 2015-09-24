@@ -44,7 +44,7 @@ public class OutputTypeEnum extends EnumeratedAttribute {
                 "shared", // dynamically linkable module
                 "static",
 // FREEHEP
-                "jni"	  // jni module
+                "jni"      // jni module
         };
     }
 }

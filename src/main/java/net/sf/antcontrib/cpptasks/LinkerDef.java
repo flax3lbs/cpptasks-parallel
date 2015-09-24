@@ -122,7 +122,7 @@ public class LinkerDef extends ProcessorDef {
      * Returns an array of active library sets for this linker definition.
      */
     public LibrarySet[] getActiveLibrarySets(LinkerDef[] defaultProviders,
-            int index) {    	
+            int index) {        
         if (isReference()) {
             return ((LinkerDef) getCheckedRef(LinkerDef.class, "LinkerDef"))
                     .getActiveUserLibrarySets(defaultProviders, index);
@@ -405,14 +405,14 @@ public class LinkerDef extends ProcessorDef {
      * <td>xlC</td>
      * <td>VisualAge Linker</td>
      * </tr>
-	 * <tr>
-	 * <td>wcl</td>
-	 * <td>OpenWatcom C/C++ linker</td>
-	 * </tr>
-	 * <tr>
-	 * <td>wfl</td>
-	 * <td>OpenWatcom FORTRAN linker</td>
-	 * </tr>
+     * <tr>
+     * <td>wcl</td>
+     * <td>OpenWatcom C/C++ linker</td>
+     * </tr>
+     * <tr>
+     * <td>wfl</td>
+     * <td>OpenWatcom FORTRAN linker</td>
+     * </tr>
      * </table>
      *  
      */
@@ -443,7 +443,7 @@ public class LinkerDef extends ProcessorDef {
         this.stack = stack.intValue();
     }
     public void visitSystemLibraries(Linker linker, FileVisitor libraryVisitor) {
-    	Project p = getProject();
+        Project p = getProject();
         if (p == null) {
             throw new java.lang.IllegalStateException("project must be set");
         }
@@ -473,8 +473,8 @@ public class LinkerDef extends ProcessorDef {
         }
     }
     public void visitUserLibraries(Linker linker, FileVisitor libraryVisitor) {
-    	Project p = getProject();
-    	if (p == null) {
+        Project p = getProject();
+        if (p == null) {
             throw new java.lang.IllegalStateException("project must be set");
         }
         if (isReference()) {

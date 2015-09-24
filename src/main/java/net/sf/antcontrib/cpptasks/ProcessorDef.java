@@ -181,7 +181,7 @@ public abstract class ProcessorDef extends DataType {
      */
     public ProcessorConfiguration createConfiguration(CCTask task,
             LinkType linkType, ProcessorDef baseDef, 
-			TargetDef targetPlatform, VersionInfo versionInfo) {
+            TargetDef targetPlatform, VersionInfo versionInfo) {
         if (isReference()) {
             return ((ProcessorDef) getCheckedRef(ProcessorDef.class,
                     "ProcessorDef")).createConfiguration(task, linkType,
@@ -198,7 +198,7 @@ public abstract class ProcessorDef extends DataType {
      * @return active compiler arguments
      */
     public CommandLineArgument[] getActiveProcessorArgs() {
-    	Project p = getProject();
+        Project p = getProject();
         if (p == null) {
             throw new java.lang.IllegalStateException("project must be set");
         }
@@ -225,7 +225,7 @@ public abstract class ProcessorDef extends DataType {
      * @return active compiler arguments
      */
     public ProcessorParam[] getActiveProcessorParams() {
-    	Project p = getProject();
+        Project p = getProject();
         if (p == null) {
             throw new java.lang.IllegalStateException("project must be set");
         }
@@ -642,7 +642,7 @@ public abstract class ProcessorDef extends DataType {
      *            object whose visit method is called for every file
      */
     public void visitFiles(FileVisitor visitor) {
-    	Project p = getProject();
+        Project p = getProject();
         if (p == null) {
             throw new java.lang.IllegalStateException(
                     "project must be set before this call");

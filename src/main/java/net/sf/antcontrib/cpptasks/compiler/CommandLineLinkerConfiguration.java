@@ -120,9 +120,9 @@ public final class CommandLineLinkerConfiguration
         return identifier;
     }
     public Linker getLinker() {
-    	return linker;
+        return linker;
     }
     public boolean isDebug() {
-    	return debug;
+        return debug;
     }
 }

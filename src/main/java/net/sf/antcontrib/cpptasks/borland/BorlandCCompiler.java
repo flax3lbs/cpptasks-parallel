@@ -47,12 +47,12 @@ public class BorlandCCompiler extends PrecompilingCommandLineCCompiler {
                 null, newEnvironment, env);
     }
     protected void addImpliedArgs(final Vector args, 
-    		final boolean debug,
+            final boolean debug,
             final boolean multithreaded, 
-			final boolean exceptions, 
-			final LinkType linkType,
-			final Boolean rtti,
-			final OptimizationEnum optimization) {
+            final boolean exceptions, 
+            final LinkType linkType,
+            final Boolean rtti,
+            final OptimizationEnum optimization) {
         args.addElement("-c");
         //
         //  turn off compiler autodependency since
@@ -70,22 +70,22 @@ public class BorlandCCompiler extends PrecompilingCommandLineCCompiler {
             args.addElement("-Od");
             args.addElement("-v");
         } else {
-        	if (optimization != null) {
-        		if (optimization.isSpeed()) {
-        			args.addElement("-O1");
-        		} else {
-        			if (optimization.isSpeed()) {
-        				args.addElement("-O2");
-        			} else {
-        				if (optimization.isNoOptimization()) {
-        					args.addElement("-Od");
-        				}
-        			}
-        		}
-        	}
+            if (optimization != null) {
+                if (optimization.isSpeed()) {
+                    args.addElement("-O1");
+                } else {
+                    if (optimization.isSpeed()) {
+                        args.addElement("-O2");
+                    } else {
+                        if (optimization.isNoOptimization()) {
+                            args.addElement("-Od");
+                        }
+                    }
+                }
+            }
         }
         if (rtti != null && !rtti.booleanValue()) {
-        	args.addElement("-RT-");
+            args.addElement("-RT-");
         }
     }
     protected void addWarningSwitch(Vector args, int level) {

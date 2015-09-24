@@ -110,14 +110,14 @@ public final class GccCCompiler extends GccCompatibleCCompiler {
         isPICMeaningful = System.getProperty("os.name").indexOf("Windows") < 0;
     }
     public void addImpliedArgs(final Vector args, 
-    		final boolean debug,
+            final boolean debug,
             final boolean multithreaded, 
-			final boolean exceptions, 
-			final LinkType linkType,
-			final Boolean rtti,
-			final OptimizationEnum optimization) {
+            final boolean exceptions, 
+            final LinkType linkType,
+            final Boolean rtti,
+            final OptimizationEnum optimization) {
         super.addImpliedArgs(args, debug, multithreaded, 
-        		exceptions, linkType, rtti, optimization);
+                exceptions, linkType, rtti, optimization);
         if (isPICMeaningful && linkType.isSharedLibrary()) {
             args.addElement("-fPIC");
         }

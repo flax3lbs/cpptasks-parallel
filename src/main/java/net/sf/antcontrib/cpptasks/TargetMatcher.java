@@ -40,7 +40,7 @@ public final class TargetMatcher implements FileVisitor {
     public TargetMatcher(CCTask task, File outputDir,
             ProcessorConfiguration[] processors, LinkerConfiguration linker,
             Vector objectFiles, Map targets,
-			VersionInfo versionInfo) {
+            VersionInfo versionInfo) {
         this.task = task;
         this.outputDir = outputDir;
         this.processors = processors;

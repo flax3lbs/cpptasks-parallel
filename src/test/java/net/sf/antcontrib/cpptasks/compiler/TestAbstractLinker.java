@@ -36,10 +36,10 @@ public class TestAbstractLinker extends TestAbstractProcessor {
         }
         public LinkerConfiguration createConfiguration(final CCTask task,
                 final LinkType linkType, 
-				final ProcessorDef[] def1, 
-				final LinkerDef def2,
-				final TargetDef targetPlatform,
-				final VersionInfo versionInfo) {
+                final ProcessorDef[] def1, 
+                final LinkerDef def2,
+                final TargetDef targetPlatform,
+                final VersionInfo versionInfo) {
             return null;
         }
         public String getIdentifier() {

@@ -100,18 +100,18 @@ public class GppLinker extends AbstractLdLinker {
         
         gfortranMainLibrary = null;
         if (linkType.linkFortran()) {
-        	if (linkType.isExecutable() && linkType.linkFortranMain() && !isDarwin()) {
+            if (linkType.isExecutable() && linkType.linkFortranMain() && !isDarwin()) {
                 if (linkType.isStaticRuntime()) {
                     String[] cmdin = new String[] { "gfortran",
                             "-print-file-name=libgfortranbegin.a" };
                     String[] cmdout = CaptureStreamHandler.run(cmdin);
                     if ((cmdout.length > 0) && (cmdout[0].indexOf('/') >= 0)) {
-                    	gfortranMainLibrary = cmdout[0];
+                        gfortranMainLibrary = cmdout[0];
                     }
                 } else {
-                	gfortranMainLibrary = "-lgfortranbegin";
-                }        		
-        	}
+                    gfortranMainLibrary = "-lgfortranbegin";
+                }                
+            }
         }
 
         runtimeLibrary = null;

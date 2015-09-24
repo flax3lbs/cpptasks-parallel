@@ -95,7 +95,7 @@ public abstract class CommandLineLinker extends AbstractLinker
       CCTask task,
       LinkType linkType,
       ProcessorDef[] baseDefs, LinkerDef specificDef, TargetDef targetPlatform,
-	  VersionInfo versionInfo) {
+      VersionInfo versionInfo) {
 
       Vector preargs = new Vector();
       Vector midargs = new Vector();
@@ -226,11 +226,11 @@ public abstract class CommandLineLinker extends AbstractLinker
     }
 
     protected String[] getOutputFileSwitch(CCTask task, String outputFile) {
-    	// FREEHEP BEGIN
-    	if (isWindows() && outputFile.length() > maxPathLength) {
-    		throw new BuildException("Absolute path too long, "+outputFile.length()+" > "+maxPathLength+": '"+outputFile);
-    	}
-    	// FREEHEP END
+        // FREEHEP BEGIN
+        if (isWindows() && outputFile.length() > maxPathLength) {
+            throw new BuildException("Absolute path too long, "+outputFile.length()+" > "+maxPathLength+": '"+outputFile);
+        }
+        // FREEHEP END
         return getOutputFileSwitch(outputFile);
     }
     protected abstract String[] getOutputFileSwitch(String outputFile);
@@ -345,7 +345,7 @@ public abstract class CommandLineLinker extends AbstractLinker
       String outputDir, String sourceFile) {
 // FREEHEP BEGIN exit if absolute path is too long. Max length on relative paths in windows is even shorter.
       if (isWindows() && sourceFile.length() > maxPathLength) {
-    	  throw new BuildException("Absolute path too long, "+sourceFile.length()+" > "+maxPathLength+": '"+sourceFile);
+          throw new BuildException("Absolute path too long, "+sourceFile.length()+" > "+maxPathLength+": '"+sourceFile);
       }
 // FREEHEP END 
       return quoteFilename(buf, sourceFile);
@@ -374,15 +374,15 @@ public abstract class CommandLineLinker extends AbstractLinker
         }
         execArgs[execArgCount] = getCommandFileSwitch(commandFile.toString());
         for(int i = execArgCount; i < args.length; i++) {
-        	//
-        	//   if embedded space and not quoted then
-        	//       quote argument
+            //
+            //   if embedded space and not quoted then
+            //       quote argument
           if (args[i].indexOf(" ") >= 0 && args[i].charAt(0) != '\"') {
-          	writer.write('\"');
-          	writer.write(args[i]);
-          	writer.write("\"\n");
+              writer.write('\"');
+              writer.write(args[i]);
+              writer.write("\"\n");
           } else {
-          	writer.write(args[i]);
+              writer.write(args[i]);
             writer.write('\n');
           }
         }

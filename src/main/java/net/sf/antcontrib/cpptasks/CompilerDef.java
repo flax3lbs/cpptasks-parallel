@@ -50,7 +50,7 @@ public final class CompilerDef extends ProcessorDef {
     private final Vector sysIncludePaths = new Vector();
     private OptimizationEnum optimization;
     private int warnings = -1;
-	private List order;
+    private List order;
     public CompilerDef() {
     }
     /**
@@ -87,7 +87,7 @@ public final class CompilerDef extends ProcessorDef {
      * Creates an include path.
      */
     public IncludePath createIncludePath() {
-    	Project p = getProject();
+        Project p = getProject();
         if (p == null) {
             throw new java.lang.IllegalStateException("project must be set");
         }
@@ -103,7 +103,7 @@ public final class CompilerDef extends ProcessorDef {
      *  
      */
     public PrecompileDef createPrecompile() throws BuildException {
-    	Project p = getProject();
+        Project p = getProject();
         if (isReference()) {
             throw noChildrenAllowed();
         }
@@ -122,7 +122,7 @@ public final class CompilerDef extends ProcessorDef {
      * variables or configuration files.
      */
     public SystemIncludePath createSysIncludePath() {
-    	Project p = getProject();
+        Project p = getProject();
         if (p == null) {
             throw new java.lang.IllegalStateException("project must be set");
         }
@@ -138,7 +138,7 @@ public final class CompilerDef extends ProcessorDef {
                 "Not an actual task, but looks like one for documentation purposes");
     }
     public UndefineArgument[] getActiveDefines() {
-    	Project p = getProject();
+        Project p = getProject();
         if (p == null) {
             throw new java.lang.IllegalStateException(
                     "project must be set before this call");
@@ -172,7 +172,7 @@ public final class CompilerDef extends ProcessorDef {
         return getActivePaths(includePaths);
     }
     private String[] getActivePaths(Vector paths) {
-    	Project p = getProject();
+        Project p = getProject();
         if (p == null) {
             throw new java.lang.IllegalStateException("project not set");
         }
@@ -458,14 +458,14 @@ public final class CompilerDef extends ProcessorDef {
      * <td>moc</td>
      * <td>Qt meta-object compiler</td>
      * </tr>
-	 * <tr>
-	 * <td>wcl</td>
-	 * <td>OpenWatcom C/C++ compiler</td>
-	 * </tr>
-	 * <tr>
-	 * <td>wfl</td>
-	 * <td>OpenWatcom FORTRAN compiler</td>
-	 * </tr>
+     * <tr>
+     * <td>wcl</td>
+     * <td>OpenWatcom C/C++ compiler</td>
+     * </tr>
+     * <tr>
+     * <td>wfl</td>
+     * <td>OpenWatcom FORTRAN compiler</td>
+     * </tr>
      * </table>
      *  
      */
@@ -496,22 +496,22 @@ public final class CompilerDef extends ProcessorDef {
      * @param value optimization level
      */
     public void setOptimize(OptimizationEnum value) {
-    	if (isReference()) {
-    		throw tooManyAttributes();
-    	}
-    	this.optimization = value;
+        if (isReference()) {
+            throw tooManyAttributes();
+        }
+        this.optimization = value;
     }
     
     // FREEHEP
-	/**
-	 * List of source filenames without extensions
-	 * @param asList
-	 */
-	public void setOrder(List/*<String>*/ order) {
-		this.order = order;
-	}
-	
-	public List getOrder() {
-		return order;
-	}
+    /**
+     * List of source filenames without extensions
+     * @param asList
+     */
+    public void setOrder(List/*<String>*/ order) {
+        this.order = order;
+    }
+    
+    public List getOrder() {
+        return order;
+    }
 }

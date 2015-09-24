@@ -52,7 +52,7 @@ public interface Processor {
      */
     ProcessorConfiguration createConfiguration(CCTask task, LinkType linkType,
             ProcessorDef[] defaultProviders, ProcessorDef specificConfig,
-			TargetDef targetPlatform, VersionInfo versionInfo);
+            TargetDef targetPlatform, VersionInfo versionInfo);
     /**
      * Retrieve an identifier that identifies the specific version of the
      * compiler. Compilers with the same identifier should produce the same

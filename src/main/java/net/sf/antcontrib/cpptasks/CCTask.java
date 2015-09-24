@@ -390,7 +390,7 @@ public class CCTask extends Task {
         projects.addElement(projectDef);
     }
     public void setProjectsOnly(final boolean value) {
-    	projectsOnly = value;
+        projectsOnly = value;
     }
     /**
      * Checks all targets that are not forced to be rebuilt or are missing
@@ -590,11 +590,11 @@ public class CCTask extends Task {
         //   if link type allowed objdir to be defaulted
         //      provide it from outfile
         if (_objDir == null) {
-        	if(_outfile != null) {
-        		_objDir = new File(_outfile.getParent());
-        	} else {
-        		_objDir = new File(".");
-        	}
+            if(_outfile != null) {
+                _objDir = new File(_outfile.getParent());
+            } else {
+                _objDir = new File(".");
+            }
         }
         
         //
@@ -611,13 +611,13 @@ public class CCTask extends Task {
         VersionInfo versionInfo = null;
         Enumeration versionEnum = versionInfos.elements();
         while (versionEnum.hasMoreElements()) {
-        	versionInfo = (VersionInfo) versionEnum.nextElement();
-        	versionInfo = versionInfo.merge();
-        	if (versionInfo.isActive()) {
-        		break;
-        	} else {
-        		versionInfo = null;
-        	}
+            versionInfo = (VersionInfo) versionEnum.nextElement();
+            versionInfo = versionInfo.merge();
+            if (versionInfo.isActive()) {
+                break;
+            } else {
+                versionInfo = null;
+            }
         }
         
         
@@ -647,8 +647,8 @@ public class CCTask extends Task {
         }
         
         if (projects.size() > 0) {
-        	ArrayList files = new ArrayList();
-        	ProjectFileCollector matcher = new ProjectFileCollector(files);
+            ArrayList files = new ArrayList();
+            ProjectFileCollector matcher = new ProjectFileCollector(files);
             for (int i = 0; i < _compilers.size(); i++) {
                 CompilerDef currentCompilerDef = (CompilerDef) _compilers
                         .elementAt(i);
@@ -659,15 +659,15 @@ public class CCTask extends Task {
                 }
             }
             compilerDef.visitFiles(matcher);
-        	
-        	
-        	Enumeration iter = projects.elements();
-        	while (iter.hasMoreElements()) {
-        		ProjectDef projectDef = (ProjectDef) iter.nextElement();
-        		if (projectDef.isActive()) {
-        			projectDef.execute(this, files, targets, linkTarget);
-        		}
-        	}
+            
+            
+            Enumeration iter = projects.elements();
+            while (iter.hasMoreElements()) {
+                ProjectDef projectDef = (ProjectDef) iter.nextElement();
+                if (projectDef.isActive()) {
+                    projectDef.execute(this, files, targets, linkTarget);
+                }
+            }
         }
         if (projectsOnly) return;
       
@@ -755,8 +755,8 @@ public class CCTask extends Task {
                     log("Limited used processors to "+noOfCores);                   
                 }
                 if (ordered) {
-                	noOfCores = 1;
-                	log("Limited processors to 1 due to ordering of source files");
+                    noOfCores = 1;
+                    log("Limited processors to 1 due to ordering of source files");
                 }
                 
                 List[] sourceFiles = new List[noOfCores];
@@ -885,9 +885,9 @@ public class CCTask extends Task {
             //           throw the exception
             //
             if (compileException != null) {
-            	if (failOnError) {
-            		throw compileException;
-            	} else {
+                if (failOnError) {
+                    throw compileException;
+                } else {
                     log(compileException.getMessage(), Project.MSG_ERR);
                     return;
                 }
@@ -932,14 +932,14 @@ public class CCTask extends Task {
                 log("Starting link {" + linkConfig.getIdentifier() + "}");
                 // ENDFREEHEP
                 if (failOnError) {
-                	linkConfig.link(this, linkTarget);
+                    linkConfig.link(this, linkTarget);
                 } else {
-                	try {
-                    	linkConfig.link(this, linkTarget);                		
-                	} catch(BuildException ex) {
+                    try {
+                        linkConfig.link(this, linkTarget);                        
+                    } catch(BuildException ex) {
                         log(ex.getMessage(), Project.MSG_ERR);
-                        return;                		
-                	}
+                        return;                        
+                    }
                 }
                 if (outputFileProperty != null)
                     getProject().setProperty(outputFileProperty,
@@ -1074,7 +1074,7 @@ public class CCTask extends Task {
     }
     protected TargetInfo getLinkTarget(LinkerConfiguration linkerConfig,
             Vector objectFiles, Vector sysObjectFiles, 
-			Map compileTargets, VersionInfo versionInfo) {
+            Map compileTargets, VersionInfo versionInfo) {
         //
         //  walk the compile phase targets and
         //     add those sources that have already been
@@ -1112,7 +1112,7 @@ public class CCTask extends Task {
     }
     
     public TargetDef getTargetPlatform() {
-    	return null;
+        return null;
     }
     /**
      * This method collects a Hashtable, keyed by output file name, of
@@ -1125,9 +1125,9 @@ public class CCTask extends Task {
             Vector objectFiles, VersionInfo versionInfo, File outputFile) {
         // FREEHEP
         final List order = new ArrayList();
-    	
+        
         Map targets = new TreeMap(new Comparator() {
-        	// Order according to "order" List followed by alphabetical order
+            // Order according to "order" List followed by alphabetical order
             public int compare( Object arg0, Object arg1 ) {
                 String f0 = (String)arg0;
                 f0 = f0.lastIndexOf('.') < 0 ? f0 : f0.substring(0, f0.lastIndexOf('.'));
@@ -1144,21 +1144,21 @@ public class CCTask extends Task {
                 int i1 = order.indexOf(f1);
                 
                 if (i0 < 0) {
-                	if (i1 < 0) {
-                		// none in list
-                		return f0.compareTo(f1);
-                	} else {
-                		// i1 in list
-                		return +1;
-                	}
+                    if (i1 < 0) {
+                        // none in list
+                        return f0.compareTo(f1);
+                    } else {
+                        // i1 in list
+                        return +1;
+                    }
                 } else {
-                	if (i1 < 0) {
-                		// i0 in list
-                		return -1;
-                	} else {
-                		// both in list
-                		return i0 == i1 ? 0 : i0 < i1 ? -1 : +1;
-                	}
+                    if (i1 < 0) {
+                        // i0 in list
+                        return -1;
+                    } else {
+                        // both in list
+                        return i0 == i1 ? 0 : i0 < i1 ? -1 : +1;
+                    }
                 }
             }
         });
@@ -1174,7 +1174,7 @@ public class CCTask extends Task {
             if (currentCompilerDef.isActive()) {
                 ProcessorConfiguration config = currentCompilerDef
                         .createConfiguration(this, linkType, compilerDef, 
-                        		targetPlatform, versionInfo);
+                                targetPlatform, versionInfo);
                 //
                 //   see if this processor had a precompile child element
                 //
@@ -1227,15 +1227,15 @@ public class CCTask extends Task {
                         localConfigs[1] = config;
                     }
                 }
-            	// BEGINFREEHEP
+                // BEGINFREEHEP
                 // a little trick here, the inner function needs the list to be final, so we repopulate it
                 order.clear();
-            	List newOrder = currentCompilerDef.getOrder();
-            	if (newOrder != null) {
-            		order.addAll(newOrder);
-            	}
+                List newOrder = currentCompilerDef.getOrder();
+                if (newOrder != null) {
+                    order.addAll(newOrder);
+                }
                 // ENDFREEHEP
-            	
+                
                 //
                 //   if the compiler has a fileset
                 //       then allow it to add its files
@@ -1243,7 +1243,7 @@ public class CCTask extends Task {
                 if (currentCompilerDef.hasFileSets()) {
                     TargetMatcher matcher = new TargetMatcher(this, _objDir,
                             localConfigs, linkerConfig, objectFiles, targets,
-							versionInfo);
+                            versionInfo);
                     currentCompilerDef.visitFiles(matcher);
                 }
                 biddingProcessors.addElement(config);
@@ -1266,15 +1266,15 @@ public class CCTask extends Task {
         compilerDef.visitFiles(matcher);
         
         if (outputFile != null && versionInfo != null) {
-        	boolean isDebug = linkerConfig.isDebug();
-    		try {
-    			linkerConfig.getLinker().addVersionFiles(versionInfo, linkType,
-    				outputFile,
-					isDebug,
-    				_objDir, matcher);
-    		} catch(IOException ex) {
-    			throw new BuildException(ex);
-    		}
+            boolean isDebug = linkerConfig.isDebug();
+            try {
+                linkerConfig.getLinker().addVersionFiles(versionInfo, linkType,
+                    outputFile,
+                    isDebug,
+                    _objDir, matcher);
+            } catch(IOException ex) {
+                throw new BuildException(ex);
+            }
         }
         return targets;
     }
@@ -1311,7 +1311,7 @@ public class CCTask extends Task {
      * @return true if building for debugging
      */
     public boolean getDebug() {
-    	return compilerDef.getDebug(null, 0);
+        return compilerDef.getDebug(null, 0);
     }
     
     /**
@@ -1579,7 +1579,7 @@ public class CCTask extends Task {
      * @return output type
      */
     public String getOuttype() {
-    	return linkType.getOutputType();
+        return linkType.getOutputType();
     }
     
     /**
@@ -1653,7 +1653,7 @@ public class CCTask extends Task {
      * @return Subsystem name
      */
     public String getSubsystem() {
-    	return linkType.getSubsystem();
+        return linkType.getSubsystem();
     }
     
     /**
@@ -1726,7 +1726,7 @@ public class CCTask extends Task {
      * @param optimization
      */
     public void setOptimize(OptimizationEnum optimization) {
-    	compilerDef.setOptimize(optimization);
+        compilerDef.setOptimize(optimization);
     }
     
     /**

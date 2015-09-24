@@ -81,13 +81,13 @@ public class ClxxCCompiler extends CommandLineCCompiler {
      *      net.sf.antcontrib.cpptasks.compiler.LinkType)
      */
     protected void addImpliedArgs(
-    		final Vector args, 
-			final boolean debug,
+            final Vector args, 
+            final boolean debug,
             final boolean multithreaded, 
-			final boolean exceptions, 
-			final LinkType linkType,
-			final Boolean rtti,
-			final OptimizationEnum optimization) {
+            final boolean exceptions, 
+            final LinkType linkType,
+            final Boolean rtti,
+            final OptimizationEnum optimization) {
         if (debug) {
             args.addElement("-gw");
         }

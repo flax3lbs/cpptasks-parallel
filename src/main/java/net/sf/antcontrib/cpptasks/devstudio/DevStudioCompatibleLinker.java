@@ -94,9 +94,9 @@ public abstract class DevStudioCompatibleLinker extends CommandLineLinker {
      * @see net.sf.antcontrib.cpptasks.compiler.CommandLineLinker#addEntry(int, java.util.Vector)
      */
     protected void addEntry(String entry, Vector args) {
-    	if (entry != null) {
-    		args.addElement("/ENTRY:" + entry);
-    	}
+        if (entry != null) {
+            args.addElement("/ENTRY:" + entry);
+        }
     }
     
     public String getCommandFileSwitch(String commandFile) {
@@ -138,12 +138,12 @@ public abstract class DevStudioCompatibleLinker extends CommandLineLinker {
      * @param objDir directory for generated files
      * @param matcher bidded fileset
      */
-	public void addVersionFiles(final VersionInfo versionInfo, 
-			final LinkType linkType,
-			final File outputFile,
-			final boolean isDebug,
-			final File objDir, 
-			final TargetMatcher matcher) throws IOException {
-		WindowsPlatform.addVersionFiles(versionInfo, linkType, outputFile, isDebug, objDir, matcher);
-	}
+    public void addVersionFiles(final VersionInfo versionInfo, 
+            final LinkType linkType,
+            final File outputFile,
+            final boolean isDebug,
+            final File objDir, 
+            final TargetMatcher matcher) throws IOException {
+        WindowsPlatform.addVersionFiles(versionInfo, linkType, outputFile, isDebug, objDir, matcher);
+    }
 }

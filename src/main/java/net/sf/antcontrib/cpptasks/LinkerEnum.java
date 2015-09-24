@@ -107,9 +107,9 @@ public class LinkerEnum extends EnumeratedAttribute {
             new ProcessorEnumValue("ar-cross",
                     net.sf.antcontrib.cpptasks.gcc.cross.GccLibrarian
                             .getInstance()),
-			new ProcessorEnumValue("wcl", OpenWatcomCLinker.getInstance()),
-			new ProcessorEnumValue("wfl", OpenWatcomFortranLinker.getInstance()),
-							};
+            new ProcessorEnumValue("wcl", OpenWatcomCLinker.getInstance()),
+            new ProcessorEnumValue("wfl", OpenWatcomFortranLinker.getInstance()),
+                            };
     public Linker getLinker() {
         return (Linker) linkers[getIndex()].getProcessor();
     }

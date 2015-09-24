@@ -43,12 +43,12 @@ public final class DevStudioMIDLCompiler extends CommandLineCompiler {
                 ".tlb", false, null, newEnvironment, env);
     }
     protected void addImpliedArgs(final Vector args, 
-    		final boolean debug,
+            final boolean debug,
             final boolean multithreaded, 
-			final boolean exceptions, 
-			final LinkType linkType,
-			final Boolean rtti,
-			final OptimizationEnum optimization) {
+            final boolean exceptions, 
+            final LinkType linkType,
+            final Boolean rtti,
+            final OptimizationEnum optimization) {
     }
     protected void addWarningSwitch(Vector args, int level) {
         DevStudioProcessor.addWarningSwitch(args, level);

@@ -437,25 +437,25 @@ public class CUtil {
      *
      */
     public static String xmlAttribEncode(String attrValue) {
-    	StringBuffer buf = new StringBuffer (attrValue);
-    	int quotePos;
-    	
+        StringBuffer buf = new StringBuffer (attrValue);
+        int quotePos;
+        
         for (quotePos = -1; (quotePos = buf.indexOf("\"", quotePos + 1)) >= 0;) {
-        	buf.deleteCharAt(quotePos);
-        	buf.insert (quotePos, "&quot;");
-        	quotePos += 5;
+            buf.deleteCharAt(quotePos);
+            buf.insert (quotePos, "&quot;");
+            quotePos += 5;
         }
         
         for (quotePos = -1; (quotePos = buf.indexOf("<", quotePos + 1)) >= 0;) {
-        	buf.deleteCharAt(quotePos);
-        	buf.insert (quotePos, "&lt;");
-        	quotePos += 3;
+            buf.deleteCharAt(quotePos);
+            buf.insert (quotePos, "&lt;");
+            quotePos += 3;
         }
         
         for (quotePos = -1; (quotePos = buf.indexOf(">", quotePos + 1)) >= 0;) {
-        	buf.deleteCharAt(quotePos);
-        	buf.insert (quotePos, "&gt;");
-        	quotePos += 3;
+            buf.deleteCharAt(quotePos);
+            buf.insert (quotePos, "&gt;");
+            quotePos += 3;
         }
         
         return buf.toString();
