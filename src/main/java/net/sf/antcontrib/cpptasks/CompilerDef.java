@@ -235,7 +235,7 @@ public final class CompilerDef extends ProcessorDef {
                         index + 1);
             }
         }
-        return false;
+        return true;
     }
     public final Boolean getRtti(CompilerDef[] defaultProviders, int index) {
         if (isReference()) {
