@@ -131,6 +131,7 @@
     <mkdir dir="${build.classes}"/>
     <javac srcdir="${java.dir}"
            destdir="${build.classes}"
+           classpath="${basedir}/lib/xercesImpl.jar"
            debug="${debug}"
            target="${javac.target}"
            source="${javac.source}"
