@@ -97,8 +97,7 @@
        ===================================================================
       -->
     <property name="dist.name" value="${name}-${version}"/>
-    <property name="dist.base" value="target"/>
-    <property name="dist.dir" value="${dist.base}/${dist.name}"/>
+    <property name="dist.dir" value="${basedir}/build/${dist.name}"/>
     <property name="dist.javadocs" value="${dist.dir}/docs/manual/api"/>
     
   </target>
@@ -353,12 +352,9 @@
      Cleans up build and distribution directories
      ===================================================================
     -->
-  <target name="clean" depends="init"
+  <target name="clean" 
           description="--> cleans up build and dist directories">
-    <delete dir="${build.dir}" />
-    <delete dir="${build.output.dir}"/>
-    <delete dir="${dist.base}" />
-    <delete dir="${dist.dir}" />
+    <delete failonerror="true" dir="${basedir}/build" />
     <delete><fileset dir="." includes="cpptasks.db*"/></delete>
   </target>
 
