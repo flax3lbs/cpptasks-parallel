@@ -31,130 +31,142 @@ import net.sf.antcontrib.cpptasks.OptimizationEnum;
  * @author Curt Arnold
  */
 public abstract class GccCompatibleCCompiler extends CommandLineCCompiler {
-    private final static String[] headerExtensions = new String[]{".h", ".hpp",
-            ".inl"};
-    private final static String[] sourceExtensions = new String[]{".c", ".cc",
-            ".cpp", ".cxx", ".c++", ".i", ".f", ".for", ".f90"};
-    /**
-     * Private constructor. Use GccCCompiler.getInstance() to get singleton
-     * instance of this class.
-     */
-    protected GccCompatibleCCompiler(String command, String identifierArg,
-            boolean libtool, GccCompatibleCCompiler libtoolCompiler,
-            boolean newEnvironment, Environment env) {
-        super(command, identifierArg, sourceExtensions, headerExtensions,
-                libtool ? ".fo" : ".o", libtool, libtoolCompiler,
-                newEnvironment, env);
-    }
-    /**
-     * Private constructor. Use GccCCompiler.getInstance() to get singleton
-     * instance of this class.
-     */
-    protected GccCompatibleCCompiler(String command, String identifierArg,
-            String[] sourceExtensions, String[] headerExtensions,
-            boolean libtool, GccCompatibleCCompiler libtoolCompiler,
-            boolean newEnvironment, Environment env) {
-        super(command, identifierArg, sourceExtensions, headerExtensions,
-                libtool ? ".fo" : ".o", libtool, libtoolCompiler,
-                newEnvironment, env);
-    }
-    public void addImpliedArgs(final Vector args,
-                    final boolean debug,
-            final boolean multithreaded,
-                        final boolean exceptions,
-                        final LinkType linkType,
-                        final Boolean rtti,
-                        final OptimizationEnum optimization) {
-        //
-        //  -fPIC is too much trouble
-        //      users have to manually add it for
-        //      operating systems that make sense
-        //
-        args.addElement("-c");
-        if (debug) {
-            args.addElement("-g");
-        } else {
-          if (optimization != null) {
+
+   private final static String[] headerExtensions = new String[]{".h", ".hpp",
+								 ".inl"};
+   private final static String[] sourceExtensions = new String[]{".c", ".cc",
+								 ".cpp", ".cxx", ".c++", ".i", ".f", ".for", ".f90"};
+   
+   /**
+    * Private constructor. Use GccCCompiler.getInstance() to get singleton
+    * instance of this class.
+    */
+   protected GccCompatibleCCompiler(String command, String identifierArg,
+				    boolean libtool, GccCompatibleCCompiler libtoolCompiler,
+				    boolean newEnvironment, Environment env) {
+      super(command, identifierArg, sourceExtensions, headerExtensions,
+	    libtool ? ".fo" : ".o", libtool, libtoolCompiler,
+	    newEnvironment, env);
+   }
+   
+   /**
+    * Private constructor. Use GccCCompiler.getInstance() to get singleton
+    * instance of this class.
+    */
+   protected GccCompatibleCCompiler(String command, String identifierArg,
+				    String[] sourceExtensions, String[] headerExtensions,
+				    boolean libtool, GccCompatibleCCompiler libtoolCompiler,
+				    boolean newEnvironment, Environment env) {
+      super(command, identifierArg, sourceExtensions, headerExtensions,
+	    libtool ? ".fo" : ".o", libtool, libtoolCompiler,
+	    newEnvironment, env);
+   }
+   
+   public void addImpliedArgs(final Vector args,
+			      final boolean debug,
+			      final boolean multithreaded,
+			      final boolean exceptions,
+			      final LinkType linkType,
+			      final Boolean rtti,
+			      final OptimizationEnum optimization,
+			      final int cores) {
+      //
+      //  -fPIC is too much trouble
+      //      users have to manually add it for
+      //      operating systems that make sense
+      //
+      args.addElement("-c");
+      if (debug) {
+	 args.addElement("-g");
+      } else {
+	 if (optimization != null) {
             if (optimization.isSize()) {
-              args.addElement("-Os");
+	       args.addElement("-Os");
             } else if (optimization.isSpeed()) {
-              if ("full".equals(optimization.getValue())) {
-                args.addElement("-O2");
-              } else {
-                if ("speed".equals(optimization.getValue())) {
-                  args.addElement("-O1");
-                } else {
-                  args.addElement("-O3");
-                }
-              }
+	       if ("full".equals(optimization.getValue())) {
+		  args.addElement("-O2");
+	       } else {
+		  if ("speed".equals(optimization.getValue())) {
+		     args.addElement("-O1");
+		  } else {
+		     args.addElement("-O3");
+		  }
+	       }
             }
-          }
-        }
-        if (getIdentifier().indexOf("mingw") >= 0) {
-            if (linkType.isSubsystemConsole()) {
-                args.addElement("-mconsole");
-            }
-            if (linkType.isSubsystemGUI()) {
-                args.addElement("-mwindows");
-            }
-        }
+	 }
+      }
+      if (getIdentifier().indexOf("mingw") >= 0) {
+	 if (linkType.isSubsystemConsole()) {
+	    args.addElement("-mconsole");
+	 }
+	 if (linkType.isSubsystemGUI()) {
+	    args.addElement("-mwindows");
+	 }
+      }
 // BEGINFREEHEP, tests have been modified
-        if (!exceptions) {
-            args.addElement("-fno-exceptions");
-        }
+      if (!exceptions) {
+	 args.addElement("-fno-exceptions");
+      }
 // ENDFREEHEP
 // BEGINFREEHEP moved to GccCCompiler
 //        if (rtti != null && !rtti.booleanValue()) {
 //          args.addElement("-fno-rtti");
 //        }
 // ENDFREEHEP
-    }
-    /**
-     * Adds an include path to the command.
-     */
-    public void addIncludePath(String path, Vector cmd) {
-        cmd.addElement("-I" + path);
-    }
-    public void addWarningSwitch(Vector args, int level) {
-        switch (level) {
-            case 0 :
-                args.addElement("-w");
-                break;
-            case 5 :
-                args.addElement("-Werror");
+   }
+   
+   /**
+    * Adds an include path to the command.
+    */
+   public void addIncludePath(String path, Vector cmd) {
+      cmd.addElement("-I" + path);
+   }
+   
+   public void addWarningSwitch(Vector args, int level) {
+      switch (level) {
+	 case 0 :
+	    args.addElement("-w");
+	    break;
+	 case 5 :
+	    args.addElement("-Werror");
             /* nobreak */
-            case 4 :
-                args.addElement("-W");
+	 case 4 :
+	    args.addElement("-W");
             /* nobreak */
-            case 3 :
-                args.addElement("-Wall");
-                break;
-        }
-    }
-    public void getDefineSwitch(StringBuffer buffer, String define, String value) {
-        buffer.append("-D");
-        buffer.append(define);
-        if (value != null && value.length() > 0) {
-            buffer.append('=');
-            buffer.append(value);
-        }
-    }
-    protected File[] getEnvironmentIncludePath() {
-        return CUtil.getPathFromEnvironment("INCLUDE", ":");
-    }
-    // Darren Sargent 22Oct2008 - added overloads to properly handle system paths
-    public String getIncludeDirSwitch(String includeDir) {
-        return getIncludeDirSwitch(includeDir, false);
-    }
-    public String getIncludeDirSwitch(String includeDir, boolean isSystem) {
-        if ( isSystem ) {
-            return "-isystem" + includeDir;
-        } else {
-        return "-I" + includeDir;
-    }
-    }
-    public void getUndefineSwitch(StringBuffer buffer, String define) {
-        buffer.append("-U");
-        buffer.append(define);
-    }
+	 case 3 :
+	    args.addElement("-Wall");
+	    break;
+      }
+   }
+   
+   public void getDefineSwitch(StringBuffer buffer, String define, String value) {
+      buffer.append("-D");
+      buffer.append(define);
+      if (value != null && value.length() > 0) {
+	 buffer.append('=');
+	 buffer.append(value);
+      }
+   }
+   
+   protected File[] getEnvironmentIncludePath() {
+      return CUtil.getPathFromEnvironment("INCLUDE", ":");
+   }
+   
+   // Darren Sargent 22Oct2008 - added overloads to properly handle system paths
+   public String getIncludeDirSwitch(String includeDir) {
+      return getIncludeDirSwitch(includeDir, false);
+   }
+   
+   public String getIncludeDirSwitch(String includeDir, boolean isSystem) {
+      if ( isSystem ) {
+	 return "-isystem" + includeDir;
+      } else {
+	 return "-I" + includeDir;
+      }
+   }
+ 
+   public void getUndefineSwitch(StringBuffer buffer, String define) {
+      buffer.append("-U");
+      buffer.append(define);
+   }
 }

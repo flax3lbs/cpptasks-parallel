@@ -40,30 +40,30 @@ import org.apache.tools.ant.types.Environment;
  * @author Curt Arnold
  */
 public final class UserInterfaceCompiler
-    extends CommandLineCompiler {
-  /**
-   * Singleton instance.
-   */
-  private static final UserInterfaceCompiler INSTANCE = new
+   extends CommandLineCompiler {
+   /**
+    * Singleton instance.
+    */
+   private static final UserInterfaceCompiler INSTANCE = new
       UserInterfaceCompiler(
-      false, null);
+         false, null);
 
-  /**
-   * Gets singleton instance of compiler.
-   * @return MetaObjectCompiler singleton instance
-   */
-  public static UserInterfaceCompiler getInstance() {
-    return INSTANCE;
-  }
+   /**
+    * Gets singleton instance of compiler.
+    * @return MetaObjectCompiler singleton instance
+    */
+   public static UserInterfaceCompiler getInstance() {
+      return INSTANCE;
+   }
 
-  /**
-   * Constructor.
-   * @param newEnvironment boolean establish an new environment.
-   * @param env Environment environment.
-   */
-  private UserInterfaceCompiler(final boolean newEnvironment,
-                                final Environment env) {
-    super("uic", "-version", new String[] {".ui"}
+   /**
+    * Constructor.
+    * @param newEnvironment boolean establish an new environment.
+    * @param env Environment environment.
+    */
+   private UserInterfaceCompiler(final boolean newEnvironment,
+                                 final Environment env) {
+      super("uic", "-version", new String[] {".ui"}
           , new String[0], ".h", false, null, newEnvironment, env);
   }
 
@@ -83,7 +83,8 @@ public final class UserInterfaceCompiler
                                 final boolean exceptions,
                                 final LinkType linkType,
                                 final Boolean rtti,
-                                final OptimizationEnum optimization) {
+                                final OptimizationEnum optimization,
+                                final int cores) {
   }
 
   /**

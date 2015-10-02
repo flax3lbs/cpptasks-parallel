@@ -52,7 +52,8 @@ public class BorlandCCompiler extends PrecompilingCommandLineCCompiler {
             final boolean exceptions, 
             final LinkType linkType,
             final Boolean rtti,
-            final OptimizationEnum optimization) {
+            final OptimizationEnum optimization,
+            final int cores) {
         args.addElement("-c");
         //
         //  turn off compiler autodependency since

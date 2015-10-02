@@ -120,7 +120,8 @@ public class ADSCCompiler extends CommandLineCCompiler {
             final boolean exceptions, 
             final LinkType linkType,
             final Boolean rtti,
-            final OptimizationEnum optimization) {
+            final OptimizationEnum optimization,
+            final int cores) {
         if (debug) {
             args.addElement("-g");
         }

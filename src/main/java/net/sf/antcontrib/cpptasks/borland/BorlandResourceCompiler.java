@@ -52,7 +52,8 @@ public class BorlandResourceCompiler extends CommandLineCompiler {
             final boolean exceptions, 
             final LinkType linkType,
             final Boolean rtti,
-            final OptimizationEnum optimization) {
+            final OptimizationEnum optimization,
+            final int cores) {
         //
         //  compile only
         //

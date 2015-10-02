@@ -41,33 +41,33 @@ import org.apache.tools.ant.types.Environment;
  * @author Curt Arnold
  */
 public final class MetaObjectCompiler
-    extends CommandLineCompiler {
-  /**
-   * Singleton instance.
-   */
-  private static final MetaObjectCompiler INSTANCE = new MetaObjectCompiler(
+   extends CommandLineCompiler {
+   /**
+    * Singleton instance.
+    */
+   private static final MetaObjectCompiler INSTANCE = new MetaObjectCompiler(
       false, null);
 
-  /**
-   * Gets singleton instance of compiler.
-   * @return MetaObjectCompiler singleton instance
-   */
-  public static MetaObjectCompiler getInstance() {
-    return INSTANCE;
-  }
+   /**
+    * Gets singleton instance of compiler.
+    * @return MetaObjectCompiler singleton instance
+    */
+   public static MetaObjectCompiler getInstance() {
+      return INSTANCE;
+   }
 
-  /**
-   * Constructor.
-   * @param newEnvironment boolean establish an new environment.
-   * @param env Environment environment.
-   */
-  private MetaObjectCompiler(final boolean newEnvironment,
-                             final Environment env) {
-    super("moc", "-version", new String[] {".h", ".cpp"}
+   /**
+    * Constructor.
+    * @param newEnvironment boolean establish an new environment.
+    * @param env Environment environment.
+    */
+   private MetaObjectCompiler(final boolean newEnvironment,
+                              final Environment env) {
+      super("moc", "-version", new String[] {".h", ".cpp"}
           , new String[0], ".moc", false, null, newEnvironment, env);
-  }
-
-  /**
+   }
+   
+   /**
    * Add arguments for debug, etc.
    * @param args Vector command argument list
    * @param debug boolean build for debug if true
@@ -83,7 +83,8 @@ public final class MetaObjectCompiler
                                 final boolean exceptions,
                                 final LinkType linkType,
                                 final Boolean rtti,
-                                final OptimizationEnum optimization) {
+                                final OptimizationEnum optimization,
+                                final int cores) {
   }
 
   /**

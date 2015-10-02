@@ -42,28 +42,28 @@ import org.apache.tools.ant.types.Environment;
  * @author Curt Arnold
  */
 public final class XpidlCompiler
-    extends CommandLineCompiler {
-  /**
-   * Singleton instance.
-   */
-  private static final XpidlCompiler INSTANCE = new XpidlCompiler(
+   extends CommandLineCompiler {
+   /**
+    * Singleton instance.
+    */
+   private static final XpidlCompiler INSTANCE = new XpidlCompiler(
       false, null);
-  /**
-   * Gets singleton instance of compiler.
-   * @return XpidlCompiler singleton instance
-   */
-  public static XpidlCompiler getInstance() {
-    return INSTANCE;
-  }
+   /**
+    * Gets singleton instance of compiler.
+    * @return XpidlCompiler singleton instance
+    */
+   public static XpidlCompiler getInstance() {
+      return INSTANCE;
+   }
 
-  /**
-   * Constructor.
-   * @param newEnvironment boolean establish an new environment.
-   * @param env Environment environment.
-   */
-  private XpidlCompiler(final boolean newEnvironment,
-                        final Environment env) {
-    super("xpidl", null, new String[] {".idl", ".xpidl"}
+   /**
+    * Constructor.
+    * @param newEnvironment boolean establish an new environment.
+    * @param env Environment environment.
+    */
+   private XpidlCompiler(final boolean newEnvironment,
+                         final Environment env) {
+      super("xpidl", null, new String[] {".idl", ".xpidl"}
           , new String[0], ".xpt", false, null, newEnvironment, env);
   }
 
@@ -83,7 +83,8 @@ public final class XpidlCompiler
                                 final boolean exceptions,
                                 final LinkType linkType,
                                 final Boolean rtti,
-                                final OptimizationEnum optimization) {
+                                final OptimizationEnum optimization,
+                                final int cores) {
   }
 
   /**

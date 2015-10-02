@@ -49,7 +49,8 @@ public class CompaqVisualFortranCompiler extends CommandLineFortranCompiler {
             final boolean exceptions, 
             final LinkType linkType,
             final Boolean rtti,
-            final OptimizationEnum optimization) {
+            final OptimizationEnum optimization,
+            final int cores) {
         args.addElement("/nologo");
         args.addElement("/compile_only");
         if (debug) {
