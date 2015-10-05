@@ -47,11 +47,6 @@
     <property name="build.classes.dir" value="${build.dir}/classes" />
     <mkdir dir="${build.classes.dir}"/>
 
-    <property name="build.output.dir" value="${basedir}/build/dg/general/apps/${component.name}"/>
-    <mkdir dir="${build.output.dir}"/>
-    <mkdir dir="${build.output.dir}/lib"/>
-    
-
     <property name="Name" value="cpptasks"/>
     <property name="jar.name" value="cpptasks-parallel"/>
     <property name="version" value="1.0b5"/>
@@ -177,7 +172,8 @@
   <target name="jars"
           depends="build"
           description="--> creates the jar">
-    <jar jarfile="${build.output.dir}/lib/${jar.name}.jar">
+    <mkdir dir="${build.lib}"/>
+    <jar jarfile="${build.lib}/${jar.name}.jar">
       <fileset dir="${build.classes.dir}"/>
       <fileset dir="${resources.dir}" excludes="META-INF"/>
       <manifest>
@@ -271,32 +267,6 @@
   <target name="gump" depends="init, jars, javadocs"
           description="--> creates the jar and javadocs" />
 
-  <!--
-     ===================================================================
-     Stage and Deploy
-     ===================================================================
-    -->
-  <target name="deploy-init" depends="init">
-    <fail unless="deploy.project.dir" message="deploy.project.dir is required"/>
-    <fail unless="component.name" message="component.name is required"/>
-    <fail unless="runtime" message="runtime is required"/>
-    <fail unless="cpptasks.location" message="cpptasks.location is required"/>
-    <path id="deploy.classpath">
-      <fileset dir="${deploy.project.dir}/build/dg/general/apps/deploy/lib" includes="**/*.jar"/>
-      <pathelement location="${deploy.project.dir}/etc"/>
-    </path>
-  </target>
-
-  <target name="stage" depends="deploy-init" description="Copies files to servers">
-    <taskdef name="stage" classname="com.digitalglobe.deploy.stage.StageTask" classpathref="deploy.classpath"/>
-    <stage projectdir="${basedir}" deployprojectdir="${basedir}"/>
-  </target>
-
-  <target name="deploy" depends="deploy-init" description="Activates staged code on the servers">
-    <taskdef name="deploy" classname="com.digitalglobe.deploy.deploy.DeployTask" classpathref="deploy.classpath"/>
-    <deploy projectdir="${basedir}" deployprojectdir="${basedir}"/>
-  </target>
-
 
   <!--
      ===================================================================
@@ -307,7 +277,7 @@
     <delete dir="${dist.dir}"/>
     <mkdir dir="${dist.dir}/src"/>
     <copy todir="${dist.dir}">
-      <fileset dir="${build.lib}" includes="cpptasks.jar"/>
+      <fileset dir="${build.lib}" includes="cpptasks-parallel.jar"/>
       <fileset dir=".">
         <include name="build.xml"/>
       </fileset>
@@ -356,6 +326,7 @@
   <target name="clean" 
           description="--> cleans up build and dist directories">
     <delete failonerror="true" dir="${basedir}/build" />
+    <delete failonerror="false" dir="${build.lib}"/>
     <delete><fileset dir="." includes="cpptasks.db*"/></delete>
   </target>
 
@@ -816,6 +787,5 @@
 
   <!-- Aggregate targets -->
   <target name="all" depends="clean, jars" description="Clean and build"/>
-  <target name="all.stage.deploy" depends="all, stage, deploy" description="Clean, build, stage and deploy"/>
 
 </project>
