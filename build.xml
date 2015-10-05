@@ -192,8 +192,8 @@
 
 
   <!-- DEPLOY -->
-  <fail unless="cpptasks.location" message="cpptasks.location must be set to deploy"/>
   <target name="deploy" depends="jars" description="Deploy cpptasks-parallel to ant lib directory">
+    <fail unless="cpptasks.location" message="cpptasks.location must be set to deploy"/>
     <copy file="${build.lib}/${jar.name}" todir="{$cpptasks.location}"/>
   </target>
 
