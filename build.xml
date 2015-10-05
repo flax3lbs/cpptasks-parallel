@@ -110,8 +110,6 @@
       <filter token="VERSION" value="${version}" />
       <filter token="DATE" value="${TODAY}" />
       <filter token="TIME" value="${TSTAMP}" />
-    </filterset>
-    <available property="junit-available" classname="junit.framework.TestCase"/>
   </target>
 
 
@@ -189,6 +187,13 @@
 
   <target name="junit-warning" depends="prepare" unless="junit-available">
     <fail message="junit.jar is required in Ant's lib directory to build this target.  Download from http://www.junit.org"/>
+  </target>
+
+
+  <!-- DEPLOY -->
+  <fail unless="cpptasks.location" message="cpptasks.location must be set to deploy"/>
+  <target name="deploy" depends="jars" description="Deploy cpptasks-parallel to ant lib directory">
+    <copy file="${build.lib}/${jar.name}" todir="{$cpptasks.location}"/>
   </target>
 
 
