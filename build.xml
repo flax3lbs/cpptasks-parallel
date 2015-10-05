@@ -280,7 +280,7 @@
     <fail unless="deploy.project.dir" message="deploy.project.dir is required"/>
     <fail unless="component.name" message="component.name is required"/>
     <fail unless="runtime" message="runtime is required"/>
-    <fail unelss="cpptasks.location" message="cpptasks.location is required"/>
+    <fail unless="cpptasks.location" message="cpptasks.location is required"/>
     <path id="deploy.classpath">
       <fileset dir="${deploy.project.dir}/build/dg/general/apps/deploy/lib" includes="**/*.jar"/>
       <pathelement location="${deploy.project.dir}/etc"/>
