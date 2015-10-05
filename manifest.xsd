@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <xsd:simpleType name="component-name">
+        <xsd:annotation>
+            <xsd:documentation>
+                New components will be added here.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <!-- NB: Alpha order please -->
+            <xsd:enumeration value="ACCA"/>
+            <xsd:enumeration value="adf"/>
+            <xsd:enumeration value="alpha"/>
+            <xsd:enumeration value="AOP-Processing"/>
+            <xsd:enumeration value="AOP-Processing-debug"/>
+            <xsd:enumeration value="APP"/>
+            <xsd:enumeration value="avid"/>
+            <xsd:enumeration value="b2b_ams"/>
+            <xsd:enumeration value="b2b_bridge"/>
+            <xsd:enumeration value="basemap"/>
+            <xsd:enumeration value="basemap_oracle"/>
+            <xsd:enumeration value="birs"/>
+            <xsd:enumeration value="boost"/>
+            <xsd:enumeration value="browsetool"/>
+            <xsd:enumeration value="ca"/>
+            <xsd:enumeration value="ccat"/>
+            <xsd:enumeration value="cfe"/>
+            <xsd:enumeration value="cfe-diagnostics"/>
+            <xsd:enumeration value="cpptasks-parallel"/>
+            <xsd:enumeration value="cppunit"/>
+            <xsd:enumeration value="cps"/>
+            <xsd:enumeration value="CSM"/>
+            <xsd:enumeration value="css2010"/>
+            <xsd:enumeration value="cssSimulator"/>
+            <xsd:enumeration value="cssSmokeTest"/>
+            <xsd:enumeration value="dataservices"/>
+            <xsd:enumeration value="dcm"/>
+            <xsd:enumeration value="dcmaps"/>
+            <xsd:enumeration value="deploy"/>
+            <xsd:enumeration value="dg_j2k"/>
+            <xsd:enumeration value="DGX"/>
+            <xsd:enumeration value="DGXServer"/>
+            <xsd:enumeration value="dia"/>
+            <xsd:enumeration value="dm"/>
+            <xsd:enumeration value="drifs"/>
+            <xsd:enumeration value="drs"/>
+            <xsd:enumeration value="eds"/>
+            <xsd:enumeration value="Expat"/>
+            <xsd:enumeration value="feasibilityassessor"/>
+            <xsd:enumeration value="FM-PPE-GUI"/>
+            <xsd:enumeration value="fns"/>
+            <xsd:enumeration value="GDAL"/>
+            <xsd:enumeration value="GISWorkflow"/>
+            <xsd:enumeration value="IP"/>
+            <xsd:enumeration value="IPL"/>
+            <xsd:enumeration value="IPL2"/>
+            <xsd:enumeration value="jasservice"/>
+            <xsd:enumeration value="jasservice-a"/>
+            <xsd:enumeration value="jasservice-b"/>
+            <xsd:enumeration value="kakadu"/>
+            <xsd:enumeration value="ma"/>
+            <xsd:enumeration value="maws"/>
+            <xsd:enumeration value="missionAwareness"/>
+            <xsd:enumeration value="OGC_Services"/>
+            <xsd:enumeration value="omega"/>
+            <xsd:enumeration value="orderassurance"/>
+            <xsd:enumeration value="orderinterface"/>
+            <xsd:enumeration value="orderstatus"/>
+            <xsd:enumeration value="ordertracker"/>
+            <xsd:enumeration value="P2A2"/>
+            <xsd:enumeration value="P2A2-debug"/>
+            <xsd:enumeration value="pm"/>
+            <xsd:enumeration value="pm_rd"/>
+            <xsd:enumeration value="PP"/>
+            <xsd:enumeration value="ppq"/>
+            <xsd:enumeration value="product_archive"/>
+            <xsd:enumeration value="proj"/>
+            <xsd:enumeration value="qac"/>
+            <xsd:enumeration value="qac_rules"/>
+            <xsd:enumeration value="RDCommon"/>
+            <xsd:enumeration value="revstatustool"/>
+            <xsd:enumeration value="rqi"/>
+            <xsd:enumeration value="shapefile-builder"/>
+            <xsd:enumeration value="sm"/>
+            <xsd:enumeration value="sonic"/>
+            <xsd:enumeration value="sonic-ingest-broker"/>
+            <xsd:enumeration value="sss"/>
+            <xsd:enumeration value="tbb"/>
+            <xsd:enumeration value="weathertranslator"/>
+            <xsd:enumeration value="Xerces"/>
+            <xsd:enumeration value="XSD"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="runtime-substituted-variable-type">
+        <xsd:attribute name="file" type="xsd:string" use="required"/>
+        <xsd:attribute name="variable" type="xsd:string" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="version">
+        <xsd:attribute name="system-version" type="xsd:NMTOKEN" use="required"/>
+        <xsd:attribute name="minor-version" type="xsd:nonNegativeInteger" use="optional"/>
+        <xsd:anyAttribute/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="artifact-path-type">
+        <xsd:simpleContent>
+            <xsd:annotation>
+                <xsd:documentation>
+                    Defines an artifact (war) to be deployed
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="rename" type="xsd:string" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            When the artifact is deployed, sometimes it must be renamed
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="script">
+        <xsd:simpleContent>
+            <xsd:annotation>
+                <xsd:documentation>
+                    The manifest element can specify scripts that will be run during the deploy process.  Each script
+                    specifies an optional OS username (the user attribute) that the script is run as. If the user
+                    attribute is not specified, the scripts are invoked as the user attribute specified in the manifest
+                    element. All scripts must be idempotent, multiple sequential invocations will have no adverse
+                    effects. The return code will be zero (0) if the script was successful. Unless otherwise noted, all
+                    scripts will be executed in the component's app directory (ie: /dg/gold/apps/pm).
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="user" type="xsd:string" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The user attribute is optional.  If not specified, the scripts are invoked as the user
+                            specified in the manifest's user attribute.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="shell" type="xsd:string" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The shell attribute is optional. If not specified, the users default login shell is used.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="roles" type="xsd:string" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            The roles attribute is an optional, comma-separated list of roles that a script element
+                            will apply to.  If not specified, the 'deploy' role is assumed indicating the script will
+                            be executed on all servers with the default 'deploy' role.  Roles allow different portions
+                            of a deploy to apply to different servers.  By specifying a role on a script element, that
+                            script will be run on each server that lists the same role in its server element.  If a
+                            script belongs to the default 'deploy' role and another role, the deploy role must be
+                            listed explicitly.  If multiple server elements list the same server for the same role
+                            repeately, the script will only be executed once for that server.  Multiple server elements
+                            will point to the same server in some of the lesser runtimes where one server can serve
+                            multiple purposes.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:element name="manifest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="exploded-archive" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            A exploded-archive element identifies a build directory that contains the contents of an
+                            archive (.jar, .war, .ear, etc.). After property substitution during staging, the contents
+                            of the directory are zipped up then the newly created archive is put in the place of the
+                            directory. This allows archive-type build artifacts to benefit from property substitution.
+                            Exploded archive directories can be nested. The most deeply nested directory must be listed
+                            first.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+                        <xsd:attribute name="directory" type="xsd:string" use="required">
+                            <xsd:annotation>
+                                <xsd:documentation>
+                                    A path to the exploded archive directory relative to the component's apps
+                                    directory. For example, if in the build/dg/general/apps/dm directory there is an
+                                    exploded ear directory called dm.ear, the directory attribute should be "dm.ear" or
+                                    "./dm.ear".
+                                </xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <!-- Note:  Components should not specify scripts that control OAS such as starting and stopping OAS
+                    containers.  All OAS operations are implicit if an oas dependency exists. -->
+                <xsd:element name="post-stage-script" type="script" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Invoked after the component has been staged.  Care must be taken to not disturb the
+                            component which is most likely running at stage time.  Whenever possible, it is best to use
+                            a post-deploy-script as the component will be stopped at deploy time.  Only use a
+                            post-stage-script if there are lengthy deploy tasks that can be safely performed while the
+                            old version of a component is running.  Post-stage scripts are executed in the component's
+                            stage directory, not in the current apps directory (ie: /dg/gold/apps/pm_4.9.0.1, not
+                            /dg/gold/apps/pm).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="stop-script" type="script" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Invoked after the new version has been staged but before links are pointed to the new
+                            version. The stop-script (and all scripts defined here) apply to only the code with which
+                            they are check in, so the actual stop-script element that will be applied may be for the
+                            previous version if that is what is currently running.  The deploy project pulls the
+                            manifest from the currently running component (via ssh) to determine the currently running
+                            version of stop-scripts to run.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="post-deploy-script" type="script" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Invoked after the component has been stopped and the links have been pointed to the new
+                            version.  Component specific deploy scripts are defined using post deploy scripts.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="start-script" type="script" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Invoked to start the component.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="component-test-script" type="script" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Invoked after the component has been started to test that the component is running
+                            properly. These tests will not invoke any interfaces to other components.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="integration-test-script" type="script" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Invoked after all components have been started to test that the component is running
+                            properly. These tests will invoke interfaces to other component to assure components are
+                            communicating properly.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="status-script" type="script" minOccurs="0" maxOccurs="unbounded">
+                    <xsd:annotation>
+                        <xsd:documentation>
+                            Invoked on a regular interval to determine if the component is running properly. The
+                            status-script may differ from the component-test-script if the component-test-script takes
+                            too long to run. The status-script should complete in less than ten seconds on an idle
+                            system.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+
+                <xsd:element name="runtime-substituted-variable" type="runtime-substituted-variable-type" minOccurs="0" maxOccurs="unbounded"/>
+
+                <xsd:element name="dependencies">
+                    <xsd:complexType>
+                        <xsd:choice maxOccurs="unbounded">
+                            <xsd:element name="component">
+                                <xsd:complexType>
+                                    <xsd:complexContent>
+                                        <xsd:extension base="version">
+                                            <xsd:choice maxOccurs="unbounded">
+                                                <xsd:element name="build-time-dependency">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            Indicates that the specified component must be built before
+                                                            this component is built. (The database must be built before
+                                                            dataservices is built so dataservices can retrieve
+                                                            constants from the database.)
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="deploy-time-dependency">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            Indicates that the specified component must be deployed and
+                                                            running before this component is deployed. (The database
+                                                            must be deployed before the PM is deployed so the PM can
+                                                            store flow definitions in the database.)
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="start-time-dependency">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            Indicates that the specified component must be running
+                                                            before this component will start. (Any OAS MDB container
+                                                            requires that Sonic is started before the OAS container can
+                                                            start.)
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="run-time-dependency">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            Indicates that the specified component must be running
+                                                            before this component will work. This component can be
+                                                            started before the specified component. A component that
+                                                            retries indefinitely to start and will eventually start
+                                                            when the specified component is started will have a
+                                                            run-time-dependency on the specified component.  (Any
+                                                            number of components require dataservices or Sonic are
+                                                            running before the component can service requests.)
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:element>
+                                                <xsd:element name="run-time-requiring-restart-dependency">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            Indicates that the specified component must be running
+                                                            before this component is started. Also indicates that if
+                                                            the specified component is down for any reason, this
+                                                            component must be restarted. (Most Sonic clients need to be
+                                                            restarted if a Sonic messaging broker is restarted.)
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:element>
+                                            </xsd:choice>
+                                            <xsd:attribute name="name" type="component-name" use="required"/>
+                                        </xsd:extension>
+                                    </xsd:complexContent>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="database">
+                                <xsd:annotation>
+                                    <xsd:documentation>
+                                        The database element is used to indicate that this component connects directly
+                                        to the database without using OAS or another mechanism.
+                                    </xsd:documentation>
+                                </xsd:annotation>
+                                <xsd:complexType>
+                                    <xsd:attribute name="user" type="xsd:string" use="required"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="jboss">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="artifact-path" type="artifact-path-type" minOccurs="0" maxOccurs="20"/>  
+                                        <xsd:element name="jvm" minOccurs="1" maxOccurs="10">
+                                            <xsd:annotation>
+                                                <xsd:documentation>
+                                                    One jvm element per jvm at runtime, each needs to specify the
+                                                    port offset.
+                                                </xsd:documentation>
+                                            </xsd:annotation>
+                                            <xsd:complexType>
+                                                <xsd:attribute name="instance" type="xsd:nonNegativeInteger"
+                                                               use="required">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            What jvm # this applies to.
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:attribute>
+                                                <xsd:attribute name="start-port-offset" type="xsd:nonNegativeInteger"
+                                                               use="required">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            What offset number to use for jboss port specification.  It is assumed
+                                                            that if there are multiple JVM's they use consecutive port offsets.
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:attribute>
+
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element name="database" minOccurs="0" maxOccurs="20">
+                                            <xsd:complexType>
+                                            <xsd:attribute name="username" type="xsd:string" use="required">
+                                                <xsd:annotation>
+                                                    <xsd:documentation>
+                                                        Database username 
+                                                    </xsd:documentation>
+                                                </xsd:annotation>
+                                            </xsd:attribute>
+                                             <xsd:attribute name="encrypted-password" use="optional" type="xsd:string"/>
+                                             <xsd:attribute name="logical-name" use="optional" type="xsd:string"/>
+                                             <xsd:attribute name="url" use="optional" type="xsd:string"/>
+                                             <xsd:attribute name="dsType" use="required"> 
+                                                <xsd:simpleType>
+                                                    <xsd:restriction base="xsd:string">
+                                                        <xsd:annotation>
+                                                            <xsd:documentation>
+                                                                Database type (OracleDS or PostgresDS) 
+                                                            </xsd:documentation>
+                                                        </xsd:annotation>
+                                                        <xsd:enumeration value="OracleDS"/>
+                                                        <xsd:enumeration value="PostgresDS"/>
+                                                    </xsd:restriction>
+                                                </xsd:simpleType>
+                                            </xsd:attribute>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element name="additional-policy-file" minOccurs="0" maxOccurs="1">
+                                               <xsd:annotation>
+                                                <xsd:documentation>
+                                                    Additions to the java policy file
+                                                </xsd:documentation>
+                                            </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element name="java-opts" minOccurs="0" maxOccurs="1">
+                                            <xsd:annotation>
+                                                <xsd:documentation>
+                                                    Additions that will be supplied to the java command line
+                                                </xsd:documentation>
+                                            </xsd:annotation>                                        
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                    <xsd:attribute name="container-name" type="xsd:string" use="required"/>
+                                    <xsd:attribute name="instances" type="xsd:nonNegativeInteger" use="required">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Number of instances per server to install.  
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="version" type="xsd:string" use="required">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                This must map to a directory in the jboss svn project that contains an
+                                                installation of jboss to be copied out to the runtime server and
+                                                configured
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="roles" type="xsd:string" use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                The roles attribute is an optional, comma-separated list of roles that
+                                                an jboss element will apply to. If not specified, the 'deploy' role is
+                                                assumed indicating the JBoss application will be deployed on all servers
+                                                with the default 'deploy' role. Roles allow different portions of a
+                                                deploy to apply to different servers. By specifying a role on a jboss
+                                                element, that JBoss application will be deployed on each server that
+                                                lists the same role in its server element. If a JBoss application belongs
+                                                to the default 'deploy' role and another role, the deploy role must be
+                                                listed explicitly. If multiple server elements list the same server for
+                                                the same role repeately, the JBoss application will only be deployed once
+                                                to that server. Multiple server elements will point to the same server
+                                                in some of the lesser runtimes where one server can serve multiple
+                                                purposes.
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="umask" type="xsd:string" use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Overrides the default umask of 022 on start script
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="stop-script" type="xsd:string" use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Name and relative location of the stop script, 
+                                                defaults to bin/stopAll{containerName}.sh.deploy-template
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="start-script" type="xsd:string"
+                                        use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Name and relative location of the start script, 
+                                                defaults to bin/startAll{containerName}.sh.deploy-template
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="oas">
+                                <xsd:complexType>
+                                    <xsd:attribute name="container" type="xsd:string" use="required"/>
+                                    <xsd:attribute name="ear-path" type="xsd:string" use="required"/>
+                                    <xsd:attribute name="application-name" type="xsd:string" use="required"/>
+                                    <xsd:attribute name="roles" type="xsd:string" use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                The roles attribute is an optional, comma-separated list of roles that
+                                                an oas element will apply to. If not specified, the 'deploy' role is
+                                                assumed indicating the OAS application will be deployed on all servers
+                                                with the default 'deploy' role. Roles allow different portions of a
+                                                deploy to apply to different servers. By specifying a role on a oas
+                                                element, that OAS application will be deployed on each server that
+                                                lists the same role in its server element. If an OAS application belongs
+                                                to the default 'deploy' role and another role, the deploy role must be
+                                                listed explicitly. If multiple server elements list the same server for
+                                                the same role repeatedly, the OAS application will only be deployed once
+                                                to that server. Multiple server elements will point to the same server
+                                                in some of the lesser runtimes where one server can serve multiple
+                                                purposes.
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="tomcat">
+                                <xsd:complexType>
+                                    <xsd:attribute name="war-path" type="xsd:string" use="required">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                The war-path attribute is a relative path to the war file within the
+                                                staged directory for the component.
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="roles" type="xsd:string" use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                The roles attribute is an optional, comma-separated list of roles that
+                                                a tomcat element will apply to. If not specified, the 'deploy' role is
+                                                assumed indicating the tomcat application will be deployed on all servers
+                                                with the default 'deploy' role. Roles allow different portions of a
+                                                deploy to apply to different servers. By specifying a role on a tomcat
+                                                element, that tomcat application will be deployed on each server that
+                                                lists the same role in its server element. If a tomcat application belongs
+                                                to the default 'deploy' role and another role, the deploy role must be
+                                                listed explicitly. If multiple server elements list the same server for
+                                                the same role repeatedly, the tomcat application will only be deployed once
+                                                to that server. Multiple server elements will point to the same server
+                                                in some of the lesser runtimes where one server can serve multiple
+                                                purposes.
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="tomcatdeploy">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="artifact-path" type="artifact-path-type" minOccurs="0" maxOccurs="20" />                                       
+                                        <xsd:element name="jvm" minOccurs="1" maxOccurs="10">
+                                            <xsd:annotation>
+                                                <xsd:documentation>
+                                                    One jvm element per jvm at runtime, each needs to specify the
+                                                    port
+                                                </xsd:documentation>
+                                            </xsd:annotation>
+                                            <xsd:complexType>
+                                                <xsd:attribute name="instance" type="xsd:nonNegativeInteger"
+                                                               use="required">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            What jvm # this applies to.
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:attribute>
+                                                <xsd:attribute name="connector-port" type="xsd:nonNegativeInteger"
+                                                               use="required">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            What port to listen on.
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:attribute>
+                                                <xsd:attribute name="shutdown-port" type="xsd:nonNegativeInteger"
+                                                               use="required">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            What port to listen on.
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:attribute>
+                                                
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element name="datasource" minOccurs="0" maxOccurs="20">
+                                            <xsd:complexType>
+                                                <xsd:attribute name="filename" type="xsd:string" use="required">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            Filename in /dg/runtime/static/app.  This will be linked under tomcat/conf/Catalina/localhost
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:attribute>
+                                                <xsd:attribute name="rename" type="xsd:string" use="optional">
+                                                    <xsd:annotation>
+                                                        <xsd:documentation>
+                                                            When the artifact is deployed, sometimes it must be renamed
+                                                        </xsd:documentation>
+                                                    </xsd:annotation>
+                                                </xsd:attribute>
+                                            </xsd:complexType>
+                                        </xsd:element>       
+                                        <xsd:element name="additional-classpath" type="xsd:string" minOccurs="0" maxOccurs="1">
+                                            <xsd:annotation>
+                                                <xsd:documentation>
+                                                    Addition to the default classpath
+                                                </xsd:documentation>
+                                            </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element name="java-opts" minOccurs="0" maxOccurs="1">
+                                            <xsd:annotation>
+                                                <xsd:documentation>
+                                                    Additions that will be supplied to the java command line
+                                                </xsd:documentation>
+                                            </xsd:annotation>                                        
+                                        </xsd:element>
+                                        <xsd:element name="additional-policy-file" minOccurs="0" maxOccurs="1">
+                                               <xsd:annotation>
+                                                <xsd:documentation>
+                                                    Additions to the catalina.policy file
+                                                </xsd:documentation>
+                                            </xsd:annotation>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                    <xsd:attribute name="container-name" type="xsd:string" use="required"/>
+                                    <xsd:attribute name="instances" type="xsd:nonNegativeInteger" use="required">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Number of instances per server to install.  
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="version" type="xsd:string" use="required">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                This must map to a directory in the tomcat svn project that contains an
+                                                installation of tomcat to be copied out to the runtime server and
+                                                configured
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="roles" type="xsd:string" use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                The roles attribute is an optional, comma-separated list of roles that
+                                                a tomcatdeploy element will apply to. If not specified, the 'deploy' role is
+                                                assumed indicating the Tomcat application will be deployed on all servers
+                                                with the default 'deploy' role. Roles allow different portions of a
+                                                deploy to apply to different servers. By specifying a role on a tomcat
+                                                element, that tomcat application will be deployed on each server that
+                                                lists the same role in its server element. If a Tomcat application belongs
+                                                to the default 'deploy' role and another role, the deploy role must be
+                                                listed explicitly. If multiple server elements list the same server for
+                                                the same role repeately, the Tomcat application will only be deployed once
+                                                to that server. Multiple server elements will point to the same server
+                                                in some of the lesser runtimes where one server can serve multiple
+                                                purposes.
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="java" type="xsd:string" use="required">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                This is the jvm to set JAVA_HOME to.  This is expected to be installed under /dg/local/cots.
+                                                e.g. if this is set to jdk1.6.0_20_x64, then JAVA_HOME=/dg/local/cots/jdk1.6.0_20_x64
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="user" type="xsd:string" use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                This is the user that should own the installation of tomcat.  If not specified
+                                                then the normal ${runtime.user} is used
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="umask" type="xsd:string" use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Overrides the default umask of 022 on start script
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>                                    
+                                    <xsd:attribute name="stop-script" type="xsd:string" use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Name and relative location of the stop script, 
+                                                defaults to bin/stopAll{containerName}.sh.deploy-template
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                    <xsd:attribute name="start-script" type="xsd:string"
+                                        use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Name and relative location of the start script, 
+                                                defaults to bin/startAll{containerName}.sh.deploy-template
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="server">
+                                <xsd:annotation>
+                                    <xsd:documentation>
+                                        The server element specifies the host name where this component runs. To
+                                        specify multiple servers, you can use a comma-separated list.
+                                    </xsd:documentation>
+                                </xsd:annotation>
+                                <xsd:complexType>
+                                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                                        <xsd:element name="file-system">
+                                            <xsd:complexType>
+                                                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                                                    <xsd:element name="ownership">
+                                                        <xsd:complexType>
+                                                            <xsd:attribute name="user" type="xsd:string"
+                                                                    use="optional"/>
+                                                            <xsd:attribute name="group" type="xsd:string"
+                                                                    use="optional"/>
+                                                            <xsd:attribute name="permissions" type="xsd:string"
+                                                                    use="optional"/>
+                                                        </xsd:complexType>
+                                                    </xsd:element>
+                                                </xsd:choice>
+                                                <xsd:attribute name="path" type="xsd:string" use="required"/>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:choice>
+                                    <xsd:attribute name="name" type="xsd:string" use="required"/>
+                                    <xsd:attribute name="roles" type="xsd:string" use="optional">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                The roles attribute is an optional, comma-separated list of roles that
+                                                a server element will serve. If not specified, the 'deploy' role is
+                                                assumed indicating the server will participate in standard deploy tasks
+                                                such as receiving artifacts, swinging links, etc. and executing scripts
+                                                and deploying OAS applications with the default 'deploy' role.  Roles
+                                                allow different portions of a deploy to apply to different servers.  By
+                                                specifying a role on a server element, that server will have scripts
+                                                executed and OAS applications deployed when the associated script and
+                                                oas elements list the same role. If a server belongs to the default
+                                                'deploy' role and anther role, the deploy role must be listed
+                                                explicitly.  If multiple server elements list the same server for the
+                                                same role repeately, scripts will be executed only once and OAS
+                                                applications will be deployed only once to that server. Multiple server
+                                                elements will point to the same server in some of the lesser runtimes
+                                                where one server can serve multiple purposes.
+                                            </xsd:documentation>
+                                        </xsd:annotation>
+                                    </xsd:attribute>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:choice>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="component-name" type="component-name" use="required"/>
+            <xsd:attribute name="user" type="xsd:string" use="required">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        The user specified will own the cache, data and log directories. This is the user the component
+                        executes as at runtime.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

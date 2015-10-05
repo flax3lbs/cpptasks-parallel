@@ -53,7 +53,7 @@
     
 
     <property name="Name" value="cpptasks"/>
-    <property name="name" value="cpptasks"/>
+    <property name="jar.name" value="cpptasks-parallel"/>
     <property name="version" value="1.0b5"/>
     
     <!--property name="debug" value="true" /-->
@@ -96,7 +96,7 @@
        Set up properties for the distribution area
        ===================================================================
       -->
-    <property name="dist.name" value="${name}-${version}"/>
+    <property name="dist.name" value="${jar.name}-${version}"/>
     <property name="dist.dir" value="${basedir}/build/${dist.name}"/>
     <property name="dist.javadocs" value="${dist.dir}/docs/manual/api"/>
     
@@ -177,7 +177,7 @@
   <target name="jars"
           depends="build"
           description="--> creates the jar">
-    <jar jarfile="${build.output.dir}/lib/${name}.jar">
+    <jar jarfile="${build.output.dir}/lib/${jar.name}.jar">
       <fileset dir="${build.classes.dir}"/>
       <fileset dir="${resources.dir}" excludes="META-INF"/>
       <manifest>
@@ -206,8 +206,8 @@
            target="${javac.target}"
            source="${javac.source}"
            optimize="false"
-           classpath="${build.lib}/${name}.jar;${java.class.path}"/>
-    <jar jarfile="${tests.build.lib}/${name}_test.jar">
+           classpath="${build.lib}/${jar.name}.jar;${java.class.path}"/>
+    <jar jarfile="${tests.build.lib}/${jar.name}_test.jar">
       <fileset dir="." includes="NOTICE LICENSE"/>
       <fileset dir="${tests.build.classes}"/>
     </jar>
@@ -218,8 +218,8 @@
            fork="true"
            dir="${tests.resources.dir}">
       <classpath>
-        <pathelement location="${tests.build.lib}/${name}_test.jar" />
-        <pathelement location="${build.lib}/${name}.jar" />
+        <pathelement location="${tests.build.lib}/${jar.name}_test.jar" />
+        <pathelement location="${build.lib}/${jar.name}.jar" />
       </classpath>
 
       <test name="net.sf.antcontrib.cpptasks.TestAllClasses" outfile="result">
@@ -235,8 +235,8 @@
            fork="true"
            dir="${tests.resources.dir}">
       <classpath>
-        <pathelement location="${tests.build.lib}/${name}_test.jar" />
-        <pathelement location="${build.lib}/${name}.jar" />
+        <pathelement location="${tests.build.lib}/${jar.name}_test.jar" />
+        <pathelement location="${build.lib}/${jar.name}.jar" />
         <pathelement location="${clover.jar}" />
       </classpath>
 
@@ -251,8 +251,8 @@
   <target name="run-devstudio-tests"  depends="build-tests">
     <junit printsummary="true" haltonfailure="true">
       <classpath>
-        <pathelement location="${tests.build.lib}/${name}_test.jar" />
-        <pathelement location="${build.lib}/${name}.jar" />
+        <pathelement location="${tests.build.lib}/${jar.name}_test.jar" />
+        <pathelement location="${build.lib}/${jar.name}.jar" />
       </classpath>
 
       <test name="net.sf.antcontrib.cpptasks.devstudio.TestInstalledDevStudio"
@@ -280,6 +280,7 @@
     <fail unless="deploy.project.dir" message="deploy.project.dir is required"/>
     <fail unless="component.name" message="component.name is required"/>
     <fail unless="runtime" message="runtime is required"/>
+    <fail unelss="cpptasks.location" message="cpptasks.location is required"/>
     <path id="deploy.classpath">
       <fileset dir="${deploy.project.dir}/build/dg/general/apps/deploy/lib" includes="**/*.jar"/>
       <pathelement location="${deploy.project.dir}/etc"/>
@@ -812,5 +813,9 @@
           destDir="src/site/xdoc" extension=".xml" force="true"/>
 
   </target>
+
+  <!-- Aggregate targets -->
+  <target name="all" depends="clean, jars" description="Clean and build"/>
+  <target name="all.stage.deploy" depends="all, stage, deploy" description="Clean, build, stage and deploy"/>`
 
 </project>
