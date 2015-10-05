@@ -191,13 +191,6 @@
   </target>
 
 
-  <!-- DEPLOY -->
-  <target name="deploy" depends="jars" description="Deploy cpptasks-parallel to ant lib directory">
-    <fail unless="cpptasks.location" message="cpptasks.location must be set to deploy"/>
-    <copy file="${build.lib}/${jar.name}.jar" todir="{$cpptasks.location}"/>
-  </target>
-
-
   <target name="build-tests" depends="init,jars,junit-warning">
     <mkdir dir="${tests.build.classes}"/>
     <mkdir dir="${tests.build.lib}"/>
