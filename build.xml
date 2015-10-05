@@ -816,6 +816,6 @@
 
   <!-- Aggregate targets -->
   <target name="all" depends="clean, jars" description="Clean and build"/>
-  <target name="all.stage.deploy" depends="all, stage, deploy" description="Clean, build, stage and deploy"/>`
+  <target name="all.stage.deploy" depends="all, stage, deploy" description="Clean, build, stage and deploy"/>
 
 </project>
