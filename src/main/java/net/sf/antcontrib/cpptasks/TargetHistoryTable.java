@@ -393,8 +393,7 @@ public final class TargetHistoryTable {
         //        compile step (most likely a compilation error) then
         //        do not write add a history entry
         //
-        if (outputFile.exists() &&
-                !CUtil.isSignificantlyBefore(outputFile.lastModified(), historyFile.lastModified())) {
+        if (outputFile.exists()) { 
             dirty = true;
             history.remove(outputName);
             SourceHistory[] sourceHistories = new SourceHistory[sources.length];

@@ -30,7 +30,7 @@ public class CCTaskProgressMonitor implements ProgressMonitor {
     }
     public void finish(ProcessorConfiguration config, boolean normal) {
         long current = System.currentTimeMillis();
-        if ((current - lastCommit) > 480000) {
+        if ((current - lastCommit) > 120000) {
             try {
                 history.commit();
                 lastCommit = System.currentTimeMillis();
@@ -40,10 +40,9 @@ public class CCTaskProgressMonitor implements ProgressMonitor {
     }
     synchronized
     public void progress(String[] sources) {
-
         history.update(config, sources, versionInfo);
         long current = System.currentTimeMillis();
-        if ((current - lastCommit) > 480000) {
+        if ((current - lastCommit) > 120000) {
             try {
                 history.commit();
                 lastCommit = current;
