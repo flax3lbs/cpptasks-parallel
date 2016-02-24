@@ -169,7 +169,7 @@ public final class DependencyTable {
         private long outputLastModified;
         private boolean rebuildOnStackExhaustion;
         public TimestampChecker(final long outputLastModified,
-                boolean rebuildOnStackExhaustion) {
+                                boolean rebuildOnStackExhaustion) {
             this.outputLastModified = outputLastModified;
             noNeedToRebuild = true;
             this.rebuildOnStackExhaustion = rebuildOnStackExhaustion;
@@ -328,15 +328,13 @@ public final class DependencyTable {
      *
      */
     public DependencyInfo getDependencyInfo(String sourceRelativeName,
-            String includePathIdentifier) {
+                                            String includePathIdentifier) {
         DependencyInfo dependInfo = null;
-        DependencyInfo[] dependInfos = (DependencyInfo[]) dependencies
-                .get(sourceRelativeName);
+        DependencyInfo[] dependInfos = (DependencyInfo[]) dependencies.get(sourceRelativeName);
         if (dependInfos != null) {
             for (int i = 0; i < dependInfos.length; i++) {
                 dependInfo = dependInfos[i];
-                if (dependInfo.getIncludePathIdentifier().equals(
-                        includePathIdentifier)) {
+                if (dependInfo.getIncludePathIdentifier().equals(includePathIdentifier)) {
                     return dependInfo;
                 }
             }
@@ -352,8 +350,7 @@ public final class DependencyTable {
             for (int i = 0; i < dependInfos.length; i++) {
                 DependencyInfo dependInfo = dependInfos[i];
                 boolean matchesExisting = false;
-                final String dependIncludePath = dependInfo
-                        .getIncludePathIdentifier();
+                final String dependIncludePath = dependInfo.getIncludePathIdentifier();
                 Enumeration includePathEnum = includePaths.elements();
                 while (includePathEnum.hasMoreElements()) {
                     if (dependIncludePath.equals(includePathEnum.nextElement())) {
@@ -417,6 +414,7 @@ public final class DependencyTable {
             String relative = CUtil.getRelativePath(baseDirPath, source);
             DependencyInfo dependInfo = getDependencyInfo(relative,
                     includePathIdentifier);
+
             if (dependInfo == null) {
                 task.log("Parsing " + relative, Project.MSG_VERBOSE);
                 dependInfo = parseIncludes(task, compiler, source);
@@ -427,9 +425,9 @@ public final class DependencyTable {
         return mustRebuild;
     }
     public DependencyInfo parseIncludes(CCTask task,
-            CompilerConfiguration compiler, File source) {
+                                        CompilerConfiguration compiler, File source) {
         DependencyInfo dependInfo = compiler.parseIncludes(task, baseDir,
-                source);
+                                                           source);
         String relativeSource = CUtil.getRelativePath(baseDirPath, source);
         putDependencyInfo(relativeSource, dependInfo);
         return dependInfo;
@@ -472,13 +470,13 @@ public final class DependencyTable {
         return;
     }
     public void walkDependencies(CCTask task, DependencyInfo dependInfo,
-            CompilerConfiguration compiler, DependencyInfo[] stack,
-            DependencyVisitor visitor) throws BuildException {
+                                 CompilerConfiguration compiler, DependencyInfo[] stack,
+                                 DependencyVisitor visitor) throws BuildException {
 // BEGINFREEHEP
-      if (dependInfo.hasTag(visitor)) {
-         return;
-      }
-      dependInfo.setTag(visitor);        
+        if (dependInfo.hasTag(visitor)) {
+            return;
+        }
+        dependInfo.setTag(visitor);        
 // ENDFREEHEP
         //
         //   visit this node
@@ -518,7 +516,7 @@ public final class DependencyTable {
             DependencyInfo[] includeInfos = new DependencyInfo[includes.length];
             for (int i = 0; i < includes.length; i++) {
                 DependencyInfo includeInfo = getDependencyInfo(includes[i],
-                        includePathIdentifier);
+                                                               includePathIdentifier);
                 includeInfos[i] = includeInfo;
             }
             //
@@ -538,10 +536,10 @@ public final class DependencyTable {
                         //      then anchor it the base directory
                         File src = new File(includes[i]);
                         if (!src.isAbsolute()) {
-                          src = new File(baseDir, includes[i]);
+                            src = new File(baseDir, includes[i]);
                         }
                         DependencyInfo includeInfo = parseIncludes(task,
-                                compiler, src);
+                                                                   compiler, src);
                         includeInfos[i] = includeInfo;
                     }
                 }
@@ -549,7 +547,7 @@ public final class DependencyTable {
                 //   if it passes a review the second time
                 //      then recurse into all the children
                 if (missingCount == 0
-                        || visitor.preview(dependInfo, includeInfos)) {
+                    || visitor.preview(dependInfo, includeInfos)) {
                     //
                     //   recurse into
                     //
@@ -558,18 +556,21 @@ public final class DependencyTable {
                         // Darren Sargent 23Oct2008
                         // only recurse for direct includes of current source
                         // file
-                        if (includeInfo.getSource().contains(
-                                File.separatorChar + "src" + File.separatorChar
-                                        + "main")
-                                || includeInfo.getSource().contains(
-                                        File.separatorChar + "src"
-                                                + File.separatorChar + "test")) {
-                            task.log("Walking dependencies for "
-                                    + includeInfo.getSource(),
-                                    Project.MSG_VERBOSE);
-                            walkDependencies(task, includeInfo, compiler,
-                                    stack, visitor);
-                        }
+
+                        // Don't have a clue as to what this check is, probably some bullshit Java known locations
+                        // for building source.
+                        // It does break any finding of indirect includes as noted by Darren above.
+                        // Umm, we don't want that.  Unless of course this 'fix' was put in place  because
+                        // there were other issues, perhaps some infinite recursion while checking for
+                        // dependencies.  But time to live dangerously and see if commenting out the if
+                        // clause below causes any problems.
+                        //if (includeInfo.getSource().contains(File.separatorChar + "src" + File.separatorChar + "main")
+                        //    || includeInfo.getSource().contains(File.separatorChar + "src" + File.separatorChar + "test")) {
+                        //task.log("Walking dependencies for "
+                        //         + includeInfo.getSource(),
+                        //         Project.MSG_VERBOSE);
+                        walkDependencies(task, includeInfo, compiler, stack, visitor);
+                        //}
                     }
                 }
             }
