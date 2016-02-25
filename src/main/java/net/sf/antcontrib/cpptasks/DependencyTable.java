@@ -87,12 +87,10 @@ public final class DependencyTable {
                         //       as the times are within a second
                         long existingLastModified = existingFile.lastModified();
                         if (!CUtil.isSignificantlyAfter(existingLastModified, sourceLastModified) &&
-                                        !CUtil.isSignificantlyBefore(existingLastModified, sourceLastModified)) {
-                            DependencyInfo dependInfo = new DependencyInfo(
-                                    includePath, source, sourceLastModified,
-                                    includes, sysIncludes);
-                            dependencyTable.putDependencyInfo(source,
-                                    dependInfo);
+                            !CUtil.isSignificantlyBefore(existingLastModified, sourceLastModified)) {
+                            DependencyInfo dependInfo = new DependencyInfo(includePath, source, sourceLastModified,
+                                                                           includes, sysIncludes);
+                            dependencyTable.putDependencyInfo(source, dependInfo);
                         }
                     }
                     source = null;
@@ -245,7 +243,7 @@ public final class DependencyTable {
     /** Flag indicating whether the cache should be written back to file. */
     private boolean dirty;
     /**
-     * Creates a target history table from dependencies.xml in the prject
+     * Creates a target history table from dependencies.xml in the project
      * directory, if it exists. Otherwise, initializes the dependencies empty.
      *
      * @param baseDir
@@ -281,8 +279,7 @@ public final class DependencyTable {
             //   write dependency file
             //
             try {
-                FileOutputStream outStream = new FileOutputStream(
-                        dependenciesFile);
+                FileOutputStream outStream = new FileOutputStream(dependenciesFile);
                 OutputStreamWriter streamWriter;
                 //
                 //    Early VM's may not have UTF-8 support

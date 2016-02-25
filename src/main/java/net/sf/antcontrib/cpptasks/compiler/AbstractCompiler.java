@@ -205,7 +205,10 @@ public abstract class AbstractCompiler extends AbstractProcessor
 				    Vector onThisPath) {
       for (int i = 0; i < includePath.length; i++) {
 	 File includeFile = new File(includePath[i], includeName);
-	 if (includeFile.exists()) {
+         // Bug found when using boost libraries.  C++ header files included from boost,
+         // and boost has some directory names equal to C++ header file name, so let's
+         // make sure it isn't a directory also.
+	 if (includeFile.exists() && (!includeFile.isDirectory())) {
 	    onThisPath.addElement(includeFile);
 	    return true;
 	 }
